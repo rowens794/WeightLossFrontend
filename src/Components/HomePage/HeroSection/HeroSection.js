@@ -16,7 +16,7 @@ class HeroSection extends Component {
                 </div>
                 <div className={css(styles.startButton)}>
                     <p>Start a</p>
-                    <p>Competition Now</p>
+                    <p>Competition Now!</p>
                 </div>
                 
             </div>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         opacity: 0.95,
         'font-family': 'Patrick Hand',
         'line-height': '75%',
-        boxShadow: '10px 10px 5px 1px rgba(0, 0, 255, .3)',
+        boxShadow: '10px 10px 5px 1px rgba(0, 0, 0, .3)',
         cursor: 'pointer',
         borderRadius: '5px',
         color: colors.lightBlue,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
             'background-color': colors.yellow,
         },
 
-        '@media only screen and (max-width:600px)': {
+        '@media only screen and (max-width:480px)': {
             width: '50vw',
             height: '18vw',
             'font-size': '5vw',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
             border: '2px solid'+ colors.black,
         },
 
-        '@media only screen and (min-width:601px) and (max-width:800px)': {
+        '@media only screen and (min-width:489px) and (max-width:768px)': {
             width: '40vw',
             height: '14vw',
             'font-size': '4vw',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
             border: '4px solid'+ colors.black,
         },
 
-        '@media only screen and (min-width:801px)': {
+        '@media only screen and (min-width:769px)': {
             width: '25vw',
             height: '9vw',
             'font-size': '2.5vw',
