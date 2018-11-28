@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.black ,
         padding: '50px',
         textAlign: 'right',
+        zIndex: 101,
     },
     linkText: {
         color: colors.white,

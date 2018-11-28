@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import colors from '../../Styling/styles';
 
-
 class HeroSection extends Component {
     
 
@@ -14,10 +13,12 @@ class HeroSection extends Component {
                     <h2 className={css(styles.titleText)}>Challenge Your Friends</h2>
                     <h2 className={css(styles.titleText)}>Lose the Weight</h2>
                 </div>
-                <div className={css(styles.startButton)}>
-                    <p>Start a</p>
-                    <p>Competition Now!</p>
-                </div>
+                <a href="/register">
+                    <div className={css(styles.startButton)}>
+                        <p>Start a</p>
+                        <p>Competition Now!</p>
+                    </div>
+                </a>
                 
             </div>
         );

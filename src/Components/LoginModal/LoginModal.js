@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import axios from 'axios';
 import colors from '../Styling/styles';
 
+
 class LoginModal extends Component {
+
+    constructor(props) {
+        super();
+
+        this.state = {
+            errorMsg: ''
+        }
+    }
+    
 
     render() {
 
@@ -11,20 +22,61 @@ class LoginModal extends Component {
             this.props.handleFPOpen()
         }
 
+        let login = () => {
+            var username = document.getElementById('usernameInput').value;
+            var password = document.getElementById('passwordInput').value;
+            var self = this;
+            let closeModal = self.props.handleClose;
+            
+            axios.post('http://localhost:3001/signin', {
+                username: username,
+                password: password
+            })
+            .then(function (response) {
+                if (response.data === '{"login":"failed"}'){
+                    
+                    self.setState({
+                        errorMsg: 'username or password incorrect'
+                    });
+                }else{
+                    console.log('set local storage')
+                    console.log(response.data)
+                    localStorage.setItem('userToken', response.data.token);
+                    localStorage.setItem('tokenExp', response.data.tokenExp);
+                    localStorage.setItem('userID', response.data.userID);
+                    closeModal();
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error)
+                self.setState({
+                    errorMsg: 'there was a problem with your login'
+                });
+            });
+        }
+
         return (
+
             <div style={this.props.show ? {} : { display: 'none' }}>
                 <div className={css(styles.background)}>
                     <button className={css(styles.x)} onClick={this.props.handleClose}>X</button><br/>
                     <h3 className={css(styles.title)}>Login</h3>
                     <br/>
-                    <form>
-                        <p className={css(styles.text)}>email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                        <p className={css(styles.text)}>password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
-                        <input className={css(styles.submit)} type="submit" value="Submit"></input>
-                    </form>
+
+                    <p className={css(styles.text)}>email</p><input ref="username" id="usernameInput" className={css(styles.input)} type="text" name="username"></input><br/><br/>
+                    <p className={css(styles.text)}>password</p><input ref="password" id="passwordInput" className={css(styles.input)} type="password" name="password"></input><br/><br/>
+                    <button className={css(styles.submit)} onClick={() => login()}>
+                        <p className={css(styles.submitText)}>Login</p>
+                    </button>
                     <br/>
                     <br/>
-                    <p>Don't yet have an account?  Sign up <span className={css(styles.link)}>HERE</span> it's free!</p>
+                    <br/>
+                    <br/>
+                    <p>{this.state.errorMsg}</p>
+                    <br/>
+                    <br/>
+                    <p>Don't yet have an account?  Sign up <a href="/register"><span className={css(styles.link)}>HERE</span></a> it's free!</p>
                     <span className={css(styles.link)} onClick={handleClick}>forgot password</span><br/><br/>
                 </div>
             </div>
@@ -69,7 +121,15 @@ const styles = StyleSheet.create({
         'width': '30%',
         float: 'left',
         'margin-left': '40%', 
-        cursor: 'pointer'
+        cursor: 'pointer', 
+        'background-color': colors.grey,
+        paddingTop: '10px',
+        border: '1px solid'+ colors.black,
+        'border-radius': '3px',
+    },
+
+    submitText: {
+
     },
 
     link: {
