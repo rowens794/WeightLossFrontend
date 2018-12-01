@@ -3,20 +3,69 @@ import { Redirect } from 'react-router'
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 
+
 import { MyContext } from '../ContextProvider/ContextProvider';
 import Sidebar from './Sidebar/Sidebar';
 import Content from './Content/Content';
 
 class Dashboard extends Component {
+
     constructor(props) {
         super();
+
+        this.compData = this.compData.bind(this);
+        this.updateCompData = this.updateCompData.bind(this);
 
         this.state = {
             userName: 'Waiting for Server',
             errorMsg: null,
             competitions: [],
-        }
+            activeCompetition: null,
+        }    
     }
+
+    async compData(id){
+        let self = this
+        await axios.post('http://localhost:3001/compData', {
+            token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
+            competitionId: id,
+        })
+        .then(function (response) {
+            if (response.data.status === 'failed') {
+                self.setState({
+                    // this should only be hit if user messes with token 
+                    errorMsg: "Something went very wrong.  Signout and signback in.",  
+                })
+            }else{
+                self.setState({ 
+                    activeCompetition: response.data
+                })
+            }
+        })
+    }
+
+    async updateCompData(id, updateFields){
+        let self = this
+        await axios.post('http://localhost:3001/updateCompData', {
+            token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
+            competitionId: id,
+            updateFields: updateFields
+        })
+        .then(function (response) {
+            if (response.data.status === 'failed') {
+                self.setState({
+                    // this should only be hit if user messes with token 
+                    errorMsg: "Something went very wrong.  Signout and signback in.",  
+                })
+            }else{
+                self.setState({ 
+                    activeCompetition: response.data
+                })
+            }
+        })
+    }
+
+
 
     render() {
         
@@ -33,7 +82,7 @@ class Dashboard extends Component {
                                     sm={{ size: 4, offset: 0 }} 
                                     md={{ size: 3, offset: 0 }}
                                     lg={{ size: 2, offset: 0 }}>
-                                    <Sidebar userInfo={this.state}/>
+                                    <Sidebar userInfo={this.state} compData={this.compData}/>
                                 </Col>
 
                                 <Col 
@@ -41,7 +90,7 @@ class Dashboard extends Component {
                                     sm={{ size: 8, offset: 0 }} 
                                     md={{ size: 9, offset: 0 }}
                                     lg={{ size: 10, offset: 0 }}>
-                                    <Content />
+                                    <Content competitionInfo={this.state.activeCompetition} compUpdate={this.updateCompData}/>
                                 </Col>
                             </Row>
                         </ Container>
@@ -68,7 +117,11 @@ class Dashboard extends Component {
             }else{
                 self.setState({ 
                     userName: response.data.name,
+                    competitions: response.data.competitions
                 })
+                
+                //get the first comp id and set it's contents to state
+                self.compData(response.data.competitions[0].id)
             }
             
         })
@@ -80,7 +133,7 @@ class Dashboard extends Component {
         });
 
 
-        
+
         axios.post('http://localhost:3001/userCompData', {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
             compID: 234134 //don't know how to populate this yet
@@ -92,9 +145,6 @@ class Dashboard extends Component {
                     errorMsg: "Something went very wrong.  Signout and signback in.",  
                 })
             }else{
-                console.log("****************")
-                console.log(response.data)
-                console.log("****************")
                 self.setState({ 
                     userName: response.data.name,
                 })

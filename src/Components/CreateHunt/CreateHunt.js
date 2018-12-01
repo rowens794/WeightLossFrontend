@@ -203,7 +203,7 @@ class CreateHunt extends Component {
 
                                     <Col>
                                         <div className={css(styles.itemContainer)}> 
-                                            <label className={css(styles.inputLabel)}>Start Date:<input id='startDate' type="text" className={css(styles.inputBox)}/></label>
+                                            <label className={css(styles.inputLabel)}>Start Date: <DatePicker id='startDate' className={css(styles.inputBox)} selected={this.state.startDate} onChange={this.handleChange}/></label>
                                         </div>
 
                                         <div className={css(styles.itemContainer)}> 
@@ -301,7 +301,6 @@ const styles = StyleSheet.create({
         color: colors.red,
         cursor: 'pointer',
         fontStyle: 'italic'
-
     },
     addPlayerButton: {
         color: colors.green,

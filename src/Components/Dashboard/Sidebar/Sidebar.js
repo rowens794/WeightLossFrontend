@@ -18,7 +18,9 @@ class Sidebar extends Component {
                     {
                         (this.props.userInfo.competitions.length === 0)
                         ? <p> no current competitions </p> 
-                        : <div> Everything in the world is fine </div> 
+                        : this.props.userInfo.competitions.map((comp) => {
+                            return <div className={css(styles.compLink)} key={comp.id} onClick={() => this.props.compData(comp.id)}> {comp.name} </div> 
+                        }) 
                     }
                     <a className={css(styles.newCompButton)} href='/createhunt'>New Competition</a>
                     
@@ -58,5 +60,12 @@ const styles = StyleSheet.create({
         marginTop: '25px',
         marginBottom: '25px',
     },
+    compLink: {
+        cursor: 'pointer', 
+        color: colors.graphicsBlue,
+        ':hover': {
+            color: colors.red
+        }
+    }
 
 });
