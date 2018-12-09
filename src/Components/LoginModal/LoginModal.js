@@ -44,6 +44,7 @@ class LoginModal extends Component {
                     localStorage.setItem('userToken', response.data.token);
                     localStorage.setItem('tokenExp', response.data.tokenExp);
                     localStorage.setItem('userID', response.data.userID);
+                    localStorage.setItem('accountVerified', response.data.verified);
                     closeModal();
                 }
                 

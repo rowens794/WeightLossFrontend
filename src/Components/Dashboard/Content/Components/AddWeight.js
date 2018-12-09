@@ -19,9 +19,9 @@ class PlayerList extends Component {
         }    
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
         this.setState({
-            competitionID: nextProps.competitionData._id,
+            competitionID: this.props.competitionData._id,
         })
     }
 
@@ -29,7 +29,7 @@ class PlayerList extends Component {
         let newWeight = parseFloat(document.getElementById("userWeight").value)
         if (newWeight > 0){
             console.log('function invoked')
-            let formattedDate = moment(new Date()).format("M/D/YY")
+            let formattedDate = moment(new Date()).format("M/D/YYYY")
             let dateWeightObj = {[formattedDate]: newWeight}
             props.compUpdate(this.state.competitionID, dateWeightObj)
             document.getElementById("userWeight").value = ''
@@ -38,9 +38,6 @@ class PlayerList extends Component {
     }
 
     render() {
-        console.log(this.state.competitionID)
-        console.log(this.state.date)
-        console.log(this.state.token)
 
         return (
             <Container fluid style={{ padding: 0, marginTop: 0 }}>

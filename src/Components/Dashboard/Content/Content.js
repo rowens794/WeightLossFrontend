@@ -6,57 +6,78 @@ import moment from 'moment';
 
 import PlayerList from './Components/PlayerList';
 import AddWeight from './Components/AddWeight';
+import Rules from './Components/Rules';
+import Chart from './Components/Chart';
 
 class Content extends Component {
 
-    render() {
-        let competitionName = ''
-        let competitorData = []
-        let competitionData = []
+    constructor(props) {
+        super();
 
-        if(this.props.competitionInfo){
-            competitionName = this.props.competitionInfo.CompetitionName
-            competitorData = this.props.competitionInfo.Players
-            competitionData = this.props.competitionInfo
+        this.state = {
+            competitionName: null,
+            competitorData: null,
+            competitionData: null,
+        }    
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.competitionInfo){
+            this.setState({
+                competitionName: nextProps.competitionInfo.CompetitionName,
+                competitorData: nextProps.competitionInfo.Players,
+                competitionData: nextProps.competitionInfo
+            })
         }
-        
+    }
+
+    render() {        
         return (
+            <div>
+                {this.state.competitionData ? 
+                    <Container fluid style={{ padding: 0, margin: 0 }}>
+                        <Row style={{ padding: 0, margin: 0 }}>
+                            <Col sm={{ size: 12, offset: 0 }}>
+                                <h2 className={css(styles.title)}>{this.state.competitionName}</h2>
+                                <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
+                            </Col>
+                        </Row>
 
-            <Container fluid style={{ padding: 0, margin: 0 }}>
-                <Row style={{ padding: 0, margin: 0 }}>
-                    <Col sm={{ size: 12, offset: 0 }}>
-                        <h2 className={css(styles.title)}>{competitionName}</h2>
-                        <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
-                    </Col>
-                </Row>
+                        <Row style={{ padding: 0, margin: 0 }}>
+                            <Col sm={{ size: 10, offset: 1 }}>
+                                <Chart playerData={this.state.competitionData.Players}/>
+                            </Col>
+                        </Row>
 
-                <Row style={{ padding: 0, margin: 0 }}>
-                    <Col sm={{ size: 10, offset: 1 }}>
-                        <div className={css(styles.chartPlaceholder)}>Weekly Weightloss Chart</div>
-                    </Col>
-                </Row>
+                        <Row style={{ padding: '60px', margin: 0 }}>
 
-                <Row style={{ padding: '40px', margin: 0 }}>
+                            <Col sm={{ size: 6, offset: 1 }}>
+                                <PlayerList playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
+                            </Col>
 
-                    <Col sm={{ size: 6, offset: 1 }}>
-                        <PlayerList playerData={competitorData} competitionData={competitionData}/>
-                    </Col>
+                            <Col sm={{ size: 4, offset: 0 }}>
+                                <AddWeight compUpdate={this.props.compUpdate} competitionData={this.state.competitionData}/>
+                            </Col>
 
-                    <Col sm={{ size: 4, offset: 0 }}>
-                        <AddWeight compUpdate={this.props.compUpdate} competitionData={competitionData}/>
-                    </Col>
+                        </Row>
 
-                </Row>
+                        <Row style={{ paddingBottom: '40px', margin: 0 }}>
+                            <Col sm={{ size: 10, offset: 1 }}>
+                                <Rules competitionData={this.state.competitionData}/>
+                            </Col>
+                        </Row>
 
-                <Row style={{ paddingBottom: '40px', margin: 0 }}>
-                    <Col sm={{ size: 10, offset: 1 }}>
-                        <div className={css(styles.elementPlaceholder)}>
-                            <p>Rules Rundown</p>
-                        </div>
-                    </Col>
-                </Row>
-
-            </ Container>
+                    </ Container>
+                : 
+                <Container fluid style={{ padding: 0, marginTop: '25vh', marginBottom: '25vh' }}>
+                    <Row style={{ padding: 0, margin: 0 }}>
+                        <Col sm={{ size: 12, offset: 0 }}>
+                            <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
+                            <p className={css(styles.text1)}>click the blue button on the sidebar</p>
+                        </Col>
+                    </Row>
+                </ Container>}
+            </div>
         );
     }
 }
@@ -72,6 +93,16 @@ const styles = StyleSheet.create({
         paddingTop: '50px',
         paddingLeft: '50px',
         textAlign: 'left',
+    },
+    title1: {
+        paddingTop: '50px',
+        paddingLeft: '50px',
+        textAlign: 'center',
+    },
+    text1: {
+        paddingTop: '24px',
+        paddingLeft: '24px',
+        textAlign: 'center',
     },
     date: {
         paddingLeft: '60px',

@@ -1,10 +1,52 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import axios from 'axios';
 import colors from '../Styling/styles';
 
-class Register extends Component {
+class Verified extends Component {
+
+    constructor(props) {
+        super();
+
+        this.state = {
+            errorMsg: ''
+        }
+    }
 
     render() {
+        let login = () => {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var self = this;
+            
+            axios.post('http://localhost:3001/signin', {
+                username: username,
+                password: password
+            })
+            .then(function (response) {
+                if (response.data === '{"login":"failed"}'){
+                    
+                    self.setState({
+                        errorMsg: 'username or password incorrect'
+                    });
+
+                }else{
+                    localStorage.setItem('userToken', response.data.token);
+                    localStorage.setItem('tokenExp', response.data.tokenExp);
+                    localStorage.setItem('userID', response.data.userID);
+                    localStorage.setItem('accountVerified', response.data.verified);
+                    window.location.href = "/dashboard";
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error)
+                self.setState({
+                    errorMsg: 'there was a problem with your login'
+                });
+            });
+        }
+
         return (
             <div className={css(styles.RegisterSection)}>
                 <div>
@@ -13,22 +55,21 @@ class Register extends Component {
                     </div>
                 </div>
 
-                <p className={css(styles.title)}>Get Your Competition Started</p>
+                <p className={css(styles.success)}>Your account is now verified.  Please sign-in.</p>
+                <p className={css(styles.title)}>Login to Your Account</p>
 
-                <form className='formBody' action="http://localhost:3001/registration" method="post">
-                    <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
-                    <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                    <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
-                    <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" name="confirm password"></input><br/><br/>
-                    <input className={css(styles.submit)} type="submit" value="Submit"></input>
-                </form>
+                <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>
+                <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
+                <button className={css(styles.submit)} onClick={() => login()}>
+                    <p>sign-in</p>
+                </button>
             </div>
             
         );
     }
 }
 
-export default Register;
+export default Verified;
 
 const styles = StyleSheet.create({
     RegisterSection: {
@@ -65,6 +106,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textDecoration: 'none',
         paddingBottom: '25px'
+    },
+
+    success: {
+        'font-family': 'Patrick Hand',
+        fontSize: '22px',
+        color: colors.green,
+        textAlign: 'center',
+        textDecoration: 'none',
+        paddingBottom: '10px'
     },
 
     text: {

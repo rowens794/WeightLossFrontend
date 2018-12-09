@@ -32,54 +32,56 @@ class PlayerList extends Component {
 
             //for each player in the competition:
             for(let i=0; i<playerData.length; i++){
+
                 //set initial variables
                 var today = moment(new Date()).format('M/D/YY')
                 var startDate = moment(new Date(this.state.competitionData.StartDate)).format('M/D/YY')//get date into proper format to serve as key
                 var initialWeight = playerData[i][2][startDate]
 
-                //get most recent weigh in
-                let keys = Object.keys(playerData[i][2])
-                var mostRecentWeight = initialWeight
-                
-                for( let j=0; j<keys.length; j++){
-                    var nextDay = moment(new Date(startDate)).add(j, 'days')
-                    var lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+
+                    //get most recent weigh in
+                    let keys = Object.keys(playerData[i][2])
+                    var mostRecentWeight = initialWeight
                     
-                    if (nextDay <= moment(new Date(today)) && (lookedUpWeight)) {
-                        mostRecentWeight = lookedUpWeight
-                        var lastWeighIn = nextDay.format('M/D/YY')
+                    for( let j=0; j<keys.length; j++){
+                        var nextDay = moment(new Date(startDate)).add(j, 'days')
+                        var lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+                        
+                        if (nextDay <= moment(new Date(today)) && (lookedUpWeight)) {
+                            mostRecentWeight = lookedUpWeight
+                        }
                     }
-                }
-
-                //get last weekly weigh in
-                var lastWeeklyWeight = initialWeight
-                for( let k=0; k<keys.length; k+=7){
-                    nextDay = moment(new Date(startDate)).add(k, 'days')
-                    lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+    
+                    //get last weekly weigh in
+                    var lastWeeklyWeight = initialWeight
+                    for( let k=0; k<keys.length; k+=7){
+                        nextDay = moment(new Date(startDate)).add(k, 'days')
+                        lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+                        
+                        if (nextDay <= moment(new Date(today)) && lookedUpWeight !== null){
+                            lastWeeklyWeight = lookedUpWeight
+                            var lastWeeklyWeighIn = nextDay.format('M/D/YY')
+                        }
+                    }
+    
+                    //set weight changes
                     
-                    if (nextDay <= moment(new Date(today)) && lookedUpWeight !== null){
-                        lastWeeklyWeight = lookedUpWeight
-                        var lastWeeklyWeighIn = nextDay.format('M/D/YY')
+                    var totalLoss = (((mostRecentWeight - initialWeight) / initialWeight) * 100).toFixed(2)
+                    var weeklyLoss = 0
+                    
+    
+                    //determine the difference between last weighin and last weekly weighin
+                    //to make sure user didn't miss a weekly weigh in
+                    var a = moment(new Date(today));
+                    var b = moment(moment(new Date(lastWeeklyWeighIn)));
+                    if (a.diff(b, 'days') > 7){
+                        weeklyLoss = "MW"
+                    }else{
+                        weeklyLoss = (((mostRecentWeight - lastWeeklyWeight) / lastWeeklyWeight) * 100).toFixed(2)
                     }
-                }
+    
+                    processedData.push([playerData[i][0], weeklyLoss, totalLoss])
 
-                //set weight changes
-                
-                var totalLoss = (((mostRecentWeight - initialWeight) / initialWeight) * 100).toFixed(2)
-                var weeklyLoss = 0
-                
-
-                //determine the difference between last weighin and last weekly weighin
-                //to make sure user didn't miss a weekly weigh in
-                var a = moment(new Date(today));
-                var b = moment(moment(new Date(lastWeeklyWeighIn)));
-                if (a.diff(b, 'days') > 7){
-                    weeklyLoss = "MW"
-                }else{
-                    weeklyLoss = (((mostRecentWeight - lastWeeklyWeight) / lastWeeklyWeight) * 100).toFixed(2)
-                }
-
-                processedData.push([playerData[i][0], weeklyLoss, totalLoss])
             }
 
             //sort processed data showing biggest loser at top

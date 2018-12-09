@@ -1,34 +1,96 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import axios from 'axios';
+import { Container, Row, Col } from 'reactstrap';
+
+import Rules from '../Dashboard/Content/Components/Rules'
+
+
+
 import colors from '../Styling/styles';
 
-class Register extends Component {
+class RegisterFromInvite extends Component {
+
+    constructor(props) {
+        super();
+
+        this.state = {
+            competitionID:  '',
+            competition: null,
+    
+        }    
+    }
+
+    componentDidMount(){
+        let self = this
+        axios.post('http://localhost:3001/limitedCompData', {
+            competitionId: this.props.match.params.id,
+        })
+        .then(function (response) {
+            if (response.data.status === 'failed') {
+                self.setState({
+                    // this should only be hit if user messes with token 
+                    errorMsg: "Something went very wrong.  Signout and signback in.",  
+                })
+            }else{
+                self.setState({ 
+                    competition: response.data
+                })
+            }
+        })
+    }
+
+
 
     render() {
         return (
+            
             <div className={css(styles.RegisterSection)}>
-                <div>
-                    <div className={css(styles.imageContainer)}>
-                        <img className={css(styles.image)} src='https://res.cloudinary.com/dfebwzrhb/image/upload/v1542039803/OnYourWay.png' alt='Focus on Results'/>
+                {(this.state.competition) ?
+                    <div>
+                        <div>
+                            <div className={css(styles.imageContainer)}>
+                                <img className={css(styles.image)} src='https://res.cloudinary.com/dfebwzrhb/image/upload/v1542039803/OnYourWay.png' alt='Focus on Results'/>
+                            </div>
+                        </div>
+
+                        <p className={css(styles.title)}>Join the {this.state.competition.CompetitionName}</p>
+
+                        <form className='formBody' action={"http://localhost:3001/registerfrominvite/"+this.props.match.params.id} method="post">
+                            <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
+                            <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
+                            <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
+                            <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" name="confirm password"></input><br/><br/>
+                            <input type="hidden" value={this.props.match.params.id} name="comp_id" />
+                            {console.log(this.props.match.params.id)}
+                            <input className={css(styles.submit)} type="submit" value="Submit"></input>
+                        </form>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <Container fluid style={{ padding: 0, margin: 0 }}>
+                            <Row style={{ padding: 0, margin: 0 }}>
+                                <Col sm={{ size: 12, offset: 0 }} 
+                                    md={{ size: 10, offset: 1 }}
+                                    lg={{ size: 8, offset: 3 }}>
+                                    <Rules competitionData={this.state.competition}/>
+                                </Col>
+                            </Row>
+                        </Container>
+                        
+
                     </div>
-                </div>
-
-                <p className={css(styles.title)}>Get Your Competition Started</p>
-
-                <form className='formBody' action="http://localhost:3001/registration" method="post">
-                    <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
-                    <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                    <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
-                    <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" name="confirm password"></input><br/><br/>
-                    <input className={css(styles.submit)} type="submit" value="Submit"></input>
-                </form>
+                : null }
             </div>
             
         );
     }
 }
 
-export default Register;
+export default RegisterFromInvite;
 
 const styles = StyleSheet.create({
     RegisterSection: {
