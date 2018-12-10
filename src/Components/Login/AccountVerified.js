@@ -9,7 +9,7 @@ class Verified extends Component {
         super();
 
         this.state = {
-            errorMsg: ''
+            errorMsg: 'Your account is now verified.  Please sign-in.'
         }
     }
 
@@ -55,7 +55,7 @@ class Verified extends Component {
                     </div>
                 </div>
 
-                <p className={css(styles.success)}>Your account is now verified.  Please sign-in.</p>
+                <p className={css(styles.success)}>{this.state.errorMsg}</p>
                 <p className={css(styles.title)}>Login to Your Account</p>
 
                 <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>

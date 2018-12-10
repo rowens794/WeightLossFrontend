@@ -79,6 +79,7 @@ class Dashboard extends Component {
                             <Row style={{ padding: 0, margin: 0 }}>
                                 <Col 
                                     style={{ padding: 0, margin: 0, marginBottom: -0 }}
+                                    xs={{ size: 0, offset: 0 }} 
                                     sm={{ size: 4, offset: 0 }} 
                                     md={{ size: 3, offset: 0 }}
                                     lg={{ size: 2, offset: 0 }}>
@@ -87,6 +88,7 @@ class Dashboard extends Component {
 
                                 <Col 
                                     style={{ padding: 0, margin: 0, marginBottom: -0 }}
+                                    xs={{ size: 12, offset: 0 }} 
                                     sm={{ size: 8, offset: 0 }} 
                                     md={{ size: 9, offset: 0 }}
                                     lg={{ size: 10, offset: 0 }}>

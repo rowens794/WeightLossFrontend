@@ -30,7 +30,7 @@ class Rules extends Component {
                 let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 let lengthOptions = {'8 Weeks': 56, '12 Weeks': 84, '16 Weeks': 112, '20 Weeks': 140  }
                 let competitionLength = lengthOptions[this.state.competitionData.CompetitionLength]
-                var finalDay = moment(new Date(this.state.competitionData.StartDate)).add(competitionLength, 'days').format('M/D/YY');
+                var finalDay = moment(new Date(this.state.competitionData.StartDate)).add(competitionLength, 'days').format('M/D/YYYY');
                 var prizePool = (this.state.competitionData.EntryFee * this.state.competitionData.Players.length).toLocaleString(undefined, {maximumFractionDigits:0})
                 var weeklyLogDay = weekdays[moment(new Date(this.state.competitionData.StartDate)).weekday()]
 

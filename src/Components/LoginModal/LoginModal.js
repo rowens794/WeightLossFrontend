@@ -46,6 +46,7 @@ class LoginModal extends Component {
                     localStorage.setItem('userID', response.data.userID);
                     localStorage.setItem('accountVerified', response.data.verified);
                     closeModal();
+                    window.location.href = "/dashboard"
                 }
                 
             })

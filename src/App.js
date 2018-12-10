@@ -11,7 +11,7 @@ import RegistrationRecieved from './Components/RegistrationRecieved/Registration
 import Login from './Components/Login/Login';
 import Verified from './Components/Login/AccountVerified';
 import Dashboard from './Components/Dashboard/Dashboard';
-import CreateHunt from './Components/CreateHunt/CreateHunt';
+import CreateComp from './Components/CreateComp/CreateComp';
 import { MyProvider } from './Components/ContextProvider/ContextProvider';
 
 
@@ -30,7 +30,7 @@ class App extends Component {
             <Route exact path="/register/" component={Register} />
             <Route exact path="/registrationrecieved" component={RegistrationRecieved} />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/createhunt" component={CreateHunt} />
+            <Route exact path="/createcomp" component={CreateComp} />
             <Route exact path="/joinacompetition/:id" component={RegisterFromInvite}/> 
             <FooterBar />
           </div>

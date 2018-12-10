@@ -37,32 +37,51 @@ class Content extends Component {
                 {this.state.competitionData ? 
                     <Container fluid style={{ padding: 0, margin: 0 }}>
                         <Row style={{ padding: 0, margin: 0 }}>
-                            <Col sm={{ size: 12, offset: 0 }}>
+                            <Col 
+                                xs={{ size: 12, offset: 0 }}
+                                sm={{ size: 12, offset: 0 }}
+                                md={{ size: 12, offset: 0 }}
+                                lg={{ size: 12, offset: 0 }}>
                                 <h2 className={css(styles.title)}>{this.state.competitionName}</h2>
                                 <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
                             </Col>
                         </Row>
 
                         <Row style={{ padding: 0, margin: 0 }}>
-                            <Col sm={{ size: 10, offset: 1 }}>
+                            <Col 
+                                xs={{ size: 10, offset: 1 }}
+                                sm={{ size: 10, offset: 1 }}
+                                md={{ size: 10, offset: 1 }}
+                                lg={{ size: 10, offset: 1 }}>
                                 <Chart playerData={this.state.competitionData.Players}/>
                             </Col>
                         </Row>
 
                         <Row style={{ padding: '60px', margin: 0 }}>
-
-                            <Col sm={{ size: 6, offset: 1 }}>
+                            <Col 
+                                xs={{ size: 6, offset: 1 }}
+                                sm={{ size: 6, offset: 1 }}
+                                md={{ size: 6, offset: 1 }}
+                                lg={{ size: 6, offset: 1 }}>
                                 <PlayerList playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
                             </Col>
 
-                            <Col sm={{ size: 4, offset: 0 }}>
+                            <Col 
+                                xs={{ size: 4, offset: 0 }}
+                                sm={{ size: 4, offset: 0 }}
+                                md={{ size: 4, offset: 0 }}
+                                lg={{ size: 4, offset: 0 }}>
                                 <AddWeight compUpdate={this.props.compUpdate} competitionData={this.state.competitionData}/>
                             </Col>
 
                         </Row>
 
                         <Row style={{ paddingBottom: '40px', margin: 0 }}>
-                            <Col sm={{ size: 10, offset: 1 }}>
+                            <Col 
+                                xs={{ size: 10, offset: 1 }}
+                                sm={{ size: 10, offset: 1 }}
+                                md={{ size: 10, offset: 1 }}
+                                lg={{ size: 10, offset: 1 }}>
                                 <Rules competitionData={this.state.competitionData}/>
                             </Col>
                         </Row>
@@ -71,7 +90,11 @@ class Content extends Component {
                 : 
                 <Container fluid style={{ padding: 0, marginTop: '25vh', marginBottom: '25vh' }}>
                     <Row style={{ padding: 0, margin: 0 }}>
-                        <Col sm={{ size: 12, offset: 0 }}>
+                        <Col 
+                            xs={{ size: 12, offset: 0 }}
+                            sm={{ size: 12, offset: 0 }}
+                            md={{ size: 12, offset: 0 }}
+                            lg={{ size: 12, offset: 0 }}>
                             <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
                             <p className={css(styles.text1)}>click the blue button on the sidebar</p>
                         </Col>

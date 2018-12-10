@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import moment from 'moment';
 
 import colors from '../../../Styling/styles';
+import Button from '../../../Elements/Button';
 
 
 class PlayerList extends Component {
@@ -25,6 +26,12 @@ class PlayerList extends Component {
         })
     }
 
+    componentWillReceiveProps() {
+        this.setState({
+            competitionID: this.props.competitionData._id,
+        })
+    }
+
     submitWeight(props){
         let newWeight = parseFloat(document.getElementById("userWeight").value)
         if (newWeight > 0){
@@ -32,6 +39,8 @@ class PlayerList extends Component {
             let formattedDate = moment(new Date()).format("M/D/YYYY")
             let dateWeightObj = {[formattedDate]: newWeight}
             props.compUpdate(this.state.competitionID, dateWeightObj)
+            console.log(this.state.competitionID)
+            console.log(dateWeightObj)
             document.getElementById("userWeight").value = ''
         }
 
@@ -54,8 +63,8 @@ class PlayerList extends Component {
                 </Row>
 
                 <Row style={{ padding: 0, margin: 0 }}>
-                    <Col sm={{ size: 12, offset: 0 }}>
-                        <p className={css(styles.button)} onClick={() => this.submitWeight(this.props)}>Submit</p>
+                    <Col sm={{ size: 10, offset: 1 }}>
+                        <Button buttonText='Submit' onClick={() => this.submitWeight(this.props)}/>
                     </Col>
                 </Row>
             </ Container>

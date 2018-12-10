@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import colors from '../../Styling/styles';
+import Button from '../../Elements/Button';
 
 class Sidebar extends Component {
 
@@ -22,7 +23,7 @@ class Sidebar extends Component {
                             return <div className={css(styles.compLink)} key={comp.id} onClick={() => this.props.compData(comp.id)}> {comp.name} </div> 
                         }) 
                     }
-                    <a className={css(styles.newCompButton)} href='/createhunt'>New Competition</a>
+                    <Button href='/createComp' buttonText='New Competition' />
                     
                 </div>
             </div>
@@ -54,11 +55,16 @@ const styles = StyleSheet.create({
         'margin-left': '10%', 
         cursor: 'pointer', 
         'background-color': colors.graphicsBlue,
-        paddingTop: '10px',
         border: '1px solid'+ colors.black,
         'border-radius': '3px',
         marginTop: '25px',
-        marginBottom: '25px',
+        marginBottom: '10px',
+        paddingTop: '10px',
+    },
+    buttonText: {
+        'vertical-align': 'middle',
+        color: colors.white,
+        fontWeight: 'bold',
     },
     compLink: {
         cursor: 'pointer', 

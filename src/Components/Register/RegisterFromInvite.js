@@ -33,6 +33,7 @@ class RegisterFromInvite extends Component {
                     errorMsg: "Something went very wrong.  Signout and signback in.",  
                 })
             }else{
+                console.log(response.data)
                 self.setState({ 
                     competition: response.data
                 })

@@ -104,16 +104,39 @@ class PlayerList extends Component {
         return (
             <Container fluid style={{ padding: 0, marginTop: 0 }}>
                 <Row style={{ padding: 0, margin: 0 }}>
-                    <Col sm={{ size: 2, offset: 0 }}>
+                    <Col 
+                        xs={{ size: 2, offset: 0 }}
+                        sm={{ size: 2, offset: 0 }}
+                        md={{ size: 2, offset: 0 }}
+                        lg={{ size: 2, offset: 0 }}
+                        >
                         <p className={css(styles.text)}>Rank</p>
                     </Col>
-                    <Col sm={{ size: 4, offset: 0 }}>
+
+                    <Col 
+                        xs={{ size: 4, offset: 0 }}
+                        sm={{ size: 4, offset: 0 }}
+                        md={{ size: 4, offset: 0 }}
+                        lg={{ size: 4, offset: 0 }}
+                        >
                         <p className={css(styles.text)}>Player</p>
                     </Col>
-                    <Col sm={{ size: 3, offset: 0 }}>
+
+                    <Col 
+                        xs={{ size: 3, offset: 0 }}
+                        sm={{ size: 3, offset: 0 }}
+                        md={{ size: 3, offset: 0 }}
+                        lg={{ size: 3, offset: 0 }}
+                        >
                         <p className={css(styles.text)}>Week %</p>
                     </Col>
-                    <Col sm={{ size: 3, offset: 0 }}>
+
+                    <Col 
+                        xs={{ size: 3, offset: 0 }}
+                        sm={{ size: 3, offset: 0 }}
+                        md={{ size: 3, offset: 0 }}
+                        lg={{ size: 3, offset: 0 }}
+                        >
                         <p className={css(styles.text)}>Total %</p>
                     </Col>
                 </Row>
@@ -122,16 +145,35 @@ class PlayerList extends Component {
                 {playersSorted.map(function(player, i){
                     return (
                         <Row style={{ padding: 0, margin: 0 }} key={i}>
-                            <Col sm={{ size: 2, offset: 0 }}>
+                            <Col 
+                                xs={{ size: 2, offset: 0 }}
+                                sm={{ size: 2, offset: 0 }}
+                                md={{ size: 2, offset: 0 }}
+                                lg={{ size: 2, offset: 0 }}>
                                 <p className={css(styles.text)}>{i+1}</p>
                             </Col>
-                            <Col sm={{ size: 4, offset: 0 }}>
+
+                            <Col 
+                                xs={{ size: 4, offset: 0 }}
+                                sm={{ size: 4, offset: 0 }}
+                                md={{ size: 4, offset: 0 }}
+                                lg={{ size: 4, offset: 0 }}>
                                 <p className={css(styles.text)}>{player[0]}</p>
                             </Col>
-                            <Col sm={{ size: 3, offset: 0 }}>
+
+                            <Col 
+                                xs={{ size: 3, offset: 0 }}
+                                sm={{ size: 3, offset: 0 }}
+                                md={{ size: 3, offset: 0 }}
+                                lg={{ size: 3, offset: 0 }}>
                                 <p className={css(styles.text)}>{player[1]}</p>
                             </Col>
-                            <Col sm={{ size: 3, offset: 0 }}>
+
+                            <Col 
+                                xs={{ size: 3, offset: 0 }}
+                                sm={{ size: 3, offset: 0 }}
+                                md={{ size: 3, offset: 0 }}
+                                lg={{ size: 3, offset: 0 }}>
                                 <p className={css(styles.text)}>{player[2]}</p>
                             </Col>
                         </Row>

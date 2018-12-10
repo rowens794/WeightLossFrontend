@@ -8,9 +8,10 @@ import validator from "email-validator";
  
 import "react-datepicker/dist/react-datepicker.css";
 import { MyContext } from '../ContextProvider/ContextProvider';
+import Button from '../Elements/Button'
 import colors from '../Styling/styles';
 
-class CreateHunt extends Component {
+class CreateComp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +23,7 @@ class CreateHunt extends Component {
             errorInterimPrize: false,
             errorParticipants: false,
             startDate: new Date(),
-            participants: [['ryan', 'rowens794@gmail.com'], ['todd', 'rosdfegmail.com'], ['susie', 'Susie1@gmail.com']]
+            participants: []
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -73,6 +74,7 @@ class CreateHunt extends Component {
     }
 
     saveCompetition(){
+        console.log('clicked')
         let CompetitionName = document.getElementById('compName').value
         let EntryFee = document.getElementById('entryFee').value
         let Payout = document.getElementById('payout').value
@@ -252,7 +254,8 @@ class CreateHunt extends Component {
                                     </Col>
                                 </Row>
 
-                                <p className={css(styles.CreateCompButton)} onClick={() => this.saveCompetition()}>Create Competition</p>
+                                <Button buttonText='Create Competition' onClick={() => this.saveCompetition()} />
+                                <br />
                             </form>
 
                         </ Container>
@@ -265,7 +268,7 @@ class CreateHunt extends Component {
     }
 }
 
-export default CreateHunt;
+export default CreateComp;
 
 const styles = StyleSheet.create({
     inputBox: {
