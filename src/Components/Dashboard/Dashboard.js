@@ -120,7 +120,12 @@ class Dashboard extends Component {
                                     sm={{ size: 8, offset: 0 }} 
                                     md={{ size: 9, offset: 0 }}
                                     lg={{ size: 10, offset: 0 }}>
-                                    <Content competitionInfo={this.state.activeCompetition} compUpdate={this.updateCompData} competitionAdmin={this.state.competitionAdmin}/>
+                                    <Content 
+                                        competitionInfo={this.state.activeCompetition} 
+                                        compUpdate={this.updateCompData} 
+                                        competitionAdmin={this.state.competitionAdmin} 
+                                        competitions={this.state.competitions}
+                                        compData={this.compData}/>
                                 </Col>
                             </Row>
                         </ Container>

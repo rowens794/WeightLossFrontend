@@ -4,12 +4,14 @@ import colors from '../../Styling/styles';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
+
 import PlayerList from './Components/PlayerList';
 import AddWeight from './Components/AddWeight';
 import Rules from './Components/Rules';
 import Chart from './Components/Chart';
 import NotStarted from './Components/NotStarted'
 import NotStartedAdmin from './Components/NotStartedAdmin'
+import XSCompList from './Components/XSCompList'
 
 class Content extends Component {
 
@@ -21,6 +23,8 @@ class Content extends Component {
             competitorData: null,
             competitionData: null,
             competitionAdmin: null,
+            competitions: null,
+            xsExpander: false,
         }    
     }
 
@@ -37,14 +41,21 @@ class Content extends Component {
                 competitionName: nextProps.competitionInfo.CompetitionName,
                 competitorData: nextProps.competitionInfo.Players,
                 competitionData: nextProps.competitionInfo,
-                competitionAdmin: nextProps.competitionAdmin
+                competitionAdmin: nextProps.competitionAdmin,
+                competitions: nextProps.competitions,
             })
         }
+        console.log(this.state.competitions)
     }
 
     render() {      
         return (
             <div>
+                <Container className='d-sm-none p-0'>
+                    <XSCompList compList={this.state.competitions} compData={this.props.compData}/>
+                </Container>
+
+
                 {this.state.competitionData ? 
                     <Container fluid style={{ padding: 0, margin: 0 }}>
                         <Row style={{ padding: 0, margin: 0 }}>
@@ -55,6 +66,7 @@ class Content extends Component {
                                 lg={{ size: 12, offset: 0 }}>
                                 <h2 className={css(styles.title)}>{this.state.competitionName}</h2>
                                 <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
+                                
                             </Col>
                         </Row>
 
@@ -169,7 +181,8 @@ const styles = StyleSheet.create({
         height: '200px',
         backgroundColor: 'grey',
         padding: '20px'
-    }
+    },
+
 
 
 });
