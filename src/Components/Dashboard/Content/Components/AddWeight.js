@@ -49,7 +49,7 @@ class PlayerList extends Component {
     render() {
 
         return (
-            <Container fluid style={{ padding: 0, marginTop: 0 }}>
+            <Container fluid style={{ padding: 0, marginTop: 0 }} className={css(styles.box)}>
                 <Row style={{ padding: 0, margin: 0 }}>
                     <Col sm={{ size: 12, offset: 0 }}>
                         <p className={css(styles.text)}>Enter or update your weight for today:</p>
@@ -76,6 +76,17 @@ class PlayerList extends Component {
 export default PlayerList;
 
 const styles = StyleSheet.create({
+    box: {
+        border: '1px solid'+ colors.black,
+        backgroundColor: colors.extraLightBlue,
+        'border-radius': '10px',
+        padding: '10px',
+        marginTop: '0px',
+        '@media (max-width: 991px)' : {
+            marginTop: '75px'
+        }
+
+    },
     text: {
         'text-align': 'center',
     },
@@ -92,7 +103,7 @@ const styles = StyleSheet.create({
     },
     input:{
         height: '35px',
-        width: '250px',
+        width: '90%',
         fontSize: '.9em',
         textAlign: 'center',
         border: '1px solid ' + colors.black,

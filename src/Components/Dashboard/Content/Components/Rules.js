@@ -87,58 +87,118 @@ class Rules extends Component {
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <p className={css(styles.text)}>The competition will run for <span className={css(styles.emph)}>{this.state.competitionData.CompetitionLength}</span></p>
                                 </Col>
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
 
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <p className={css(styles.text)}>The competition begins on <span className={css(styles.emph)}>{this.state.competitionData.StartDate}</span> and ends <span className={css(styles.emph)}>{finalDay}</span></p>
                                 </Col>
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
 
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <p className={css(styles.text)}>Each participant must log their weight each week by midnight each <span className={css(styles.emph)}>{weeklyLogDay}</span></p>
                                 </Col>
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
 
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <p className={css(styles.text)}>Each participant will pay <span className={css(styles.emph)}>${this.state.competitionData.EntryFee}</span> to enter the competition</p>
                                 </Col>
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <div key='rule4' className={css(styles.text)}>{ruleFour}</div>
                                 </Col>
                             </Row>
 
                             <Row style={{ padding: 0, margin: 0 }}>
-                                <Col sm={{ size: 1, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 1, offset: 0 }}
+                                    sm={{ size: 1, offset: 0 }}
+                                    md={{ size: 1, offset: 0 }}
+                                    lg={{ size: 1, offset: 0 }}
+                                    >
                                     <p className={css(styles.rules)}>-</p>
                                 </Col>
-                                <Col sm={{ size: 10, offset: 0 }}>
+                                <Col 
+                                    xs={{ size: 11, offset: 0 }}
+                                    sm={{ size: 11, offset: 0 }}
+                                    md={{ size: 11, offset: 0 }}
+                                    lg={{ size: 11, offset: 0 }}
+                                    >
                                     <div key='rule5' className={css(styles.text)}>{ruleFive}</div>
                                 </Col>
                             </Row>

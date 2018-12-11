@@ -21,28 +21,57 @@ class Dashboard extends Component {
             errorMsg: null,
             competitions: [],
             activeCompetition: null,
+            competitionAdmin: null,
         }    
     }
 
-    async compData(id){
+    async compData(id, compAdmin){
         let self = this
-        await axios.post('http://localhost:3001/compData', {
-            token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
-            competitionId: id,
-        })
-        .then(function (response) {
-            if (response.data.status === 'failed') {
-                self.setState({
-                    // this should only be hit if user messes with token 
-                    errorMsg: "Something went very wrong.  Signout and signback in.",  
+
+        //test if competition is loaded in state
+        if(this.state.activeCompetition){
+            //if it's loaded then make sure that the same competition isn't re-retrieved from the API
+            if(this.state.activeCompetition._id !== id){
+                await axios.post('http://localhost:3001/compData', {
+                    token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
+                    competitionId: id,
                 })
-            }else{
-                self.setState({ 
-                    activeCompetition: response.data
+                .then(function (response) {
+                    if (response.data.status === 'failed') {
+                        self.setState({
+                            // this should only be hit if user messes with token 
+                            errorMsg: "Something went very wrong.  Signout and signback in.",  
+                        })
+                    }else{
+                        self.setState({ 
+                            activeCompetition: response.data,
+                            competitionAdmin: compAdmin
+                        })
+                    }
                 })
             }
-        })
+        }else{
+            //if competition doesn't exist in state then go ahead and grab from the api
+            await axios.post('http://localhost:3001/compData', {
+                token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
+                competitionId: id,
+            })
+            .then(function (response) {
+                if (response.data.status === 'failed') {
+                    self.setState({
+                        // this should only be hit if user messes with token 
+                        errorMsg: "Something went very wrong.  Signout and signback in.",  
+                    })
+                }else{
+                    self.setState({ 
+                        activeCompetition: response.data,
+                        competitionAdmin: compAdmin
+                    })
+                }
+            })
+        }
     }
+
 
     async updateCompData(id, updateFields){
         let self = this
@@ -59,7 +88,7 @@ class Dashboard extends Component {
                 })
             }else{
                 self.setState({ 
-                    activeCompetition: response.data
+                    activeCompetition: response.data,
                 })
             }
         })
@@ -68,7 +97,6 @@ class Dashboard extends Component {
 
 
     render() {
-        
         return (
             <MyContext.Consumer>
                 {(context) => (
@@ -92,7 +120,7 @@ class Dashboard extends Component {
                                     sm={{ size: 8, offset: 0 }} 
                                     md={{ size: 9, offset: 0 }}
                                     lg={{ size: 10, offset: 0 }}>
-                                    <Content competitionInfo={this.state.activeCompetition} compUpdate={this.updateCompData}/>
+                                    <Content competitionInfo={this.state.activeCompetition} compUpdate={this.updateCompData} competitionAdmin={this.state.competitionAdmin}/>
                                 </Col>
                             </Row>
                         </ Container>

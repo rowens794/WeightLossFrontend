@@ -20,7 +20,7 @@ class Sidebar extends Component {
                         (this.props.userInfo.competitions.length === 0)
                         ? <p> no current competitions </p> 
                         : this.props.userInfo.competitions.map((comp) => {
-                            return <div className={css(styles.compLink)} key={comp.id} onClick={() => this.props.compData(comp.id)}> {comp.name} </div> 
+                            return <div className={css(styles.compLink)} key={comp.id} onClick={() => this.props.compData(comp.id, comp.admin)}> {comp.name} </div> 
                         }) 
                     }
                     <Button href='/createComp' buttonText='New Competition' />

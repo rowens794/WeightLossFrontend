@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {XYPlot, XAxis, YAxis, VerticalGridLines, LineSeries, } from 'react-vis';
 import { Container, Row, Col } from 'reactstrap';
 
-
 import colors from '../../../Styling/styles'
 
 //import moment from 'moment';
@@ -87,6 +86,36 @@ class Chart extends Component {
             }
         }
 
+        
+        //js to get styling options for the axis on the chart
+        //react-vis couldn't seem to handle media queries
+        let yAxisStyles = {}
+        let xAxisStyles = {}
+        let yAxisTitle = '' 
+        var viewportWidth = window.innerWidth
+
+        switch(true) {
+            case viewportWidth <= 576:
+                yAxisStyles = {fontSize: '12px', textAlign: 'left'}
+                xAxisStyles = {fontSize: '12px', marginBottom: '0px'}
+                yAxisTitle = '% Chg' 
+                break;
+            case viewportWidth <= 767:
+                yAxisStyles = {fontSize: '14px', textAlign: 'left'}
+                xAxisStyles = {fontSize: '12px', marginBottom: '0px'}
+                yAxisTitle = '% Chg' 
+                break;
+            case viewportWidth <= 991:
+                yAxisStyles = {fontSize: '16px', textAlign: 'left'}
+                xAxisStyles = {fontSize: '12px', marginBottom: '0px'}
+                yAxisTitle = '% Weight Change' 
+                break;
+            default:
+                yAxisStyles = {fontSize: '16px', textAlign: 'left'}
+                xAxisStyles = {fontSize: '12px', marginBottom: '0px'}
+                yAxisTitle = 'Percentage Weight Change' 
+        }
+
         return (
             <div id='chartContainer'>
                 { //Check if message failed
@@ -100,8 +129,8 @@ class Chart extends Component {
                                     <XYPlot xType="time" width={document.getElementById("chartContainer").clientWidth} height={document.getElementById("chartContainer").clientWidth * .5} margin={{bottom: 100}}>
                                     
                                         <VerticalGridLines />
-                                        <XAxis tickLabelAngle={-70} style={{marginBottom: '0px', fontSize: '16px',}}/>
-                                        <YAxis title="% Weight Change" style={{fontSize: '16px', textAlign: 'left'}}/>
+                                        <XAxis tickLabelAngle={-70} style={xAxisStyles}/>
+                                        <YAxis title={yAxisTitle} style={yAxisStyles}/>
                                         
                                         {correctedPlayerData.map((player, i) => {
                                             return <LineSeries key={i} 
@@ -136,3 +165,5 @@ class Chart extends Component {
 }
 
 export default Chart;
+
+

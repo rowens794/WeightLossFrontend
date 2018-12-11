@@ -8,6 +8,8 @@ import PlayerList from './Components/PlayerList';
 import AddWeight from './Components/AddWeight';
 import Rules from './Components/Rules';
 import Chart from './Components/Chart';
+import NotStarted from './Components/NotStarted'
+import NotStartedAdmin from './Components/NotStartedAdmin'
 
 class Content extends Component {
 
@@ -18,20 +20,29 @@ class Content extends Component {
             competitionName: null,
             competitorData: null,
             competitionData: null,
+            competitionAdmin: null,
         }    
     }
+
+    componentDidMount() {
+        this.setState({
+
+        })
+    }
+
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.competitionInfo){
             this.setState({
                 competitionName: nextProps.competitionInfo.CompetitionName,
                 competitorData: nextProps.competitionInfo.Players,
-                competitionData: nextProps.competitionInfo
+                competitionData: nextProps.competitionInfo,
+                competitionAdmin: nextProps.competitionAdmin
             })
         }
     }
 
-    render() {        
+    render() {      
         return (
             <div>
                 {this.state.competitionData ? 
@@ -49,27 +60,41 @@ class Content extends Component {
 
                         <Row style={{ padding: 0, margin: 0 }}>
                             <Col 
-                                xs={{ size: 10, offset: 1 }}
-                                sm={{ size: 10, offset: 1 }}
+                                xs={{ size: 11, offset: 1 }}
+                                sm={{ size: 11, offset: 1 }}
                                 md={{ size: 10, offset: 1 }}
                                 lg={{ size: 10, offset: 1 }}>
-                                <Chart playerData={this.state.competitionData.Players}/>
+                                {//test if the competition has started
+                                    (new Date() >= new Date(this.state.competitionData.StartDate)) 
+                                        //if it has then show the weight chart
+                                        ? <Chart playerData={this.state.competitionData.Players}/>
+                                        : (this.state.competitionAdmin)
+                                            //if it hasn't and user is competition admin show add user
+                                            ? <NotStartedAdmin 
+                                                compID= {this.state.competitionData._id}
+                                                startDate={this.state.competitionData.StartDate}
+                                                competitionName={this.state.competitionData.CompetitionName}
+                                                newUserEmail={null}
+                                                newUserName={null} />
+                                            //else show reminder to login on start date
+                                            : <NotStarted startDate={this.state.competitionData.StartDate}/>
+                                    }
                             </Col>
                         </Row>
 
                         <Row style={{ padding: '60px', margin: 0 }}>
                             <Col 
-                                xs={{ size: 6, offset: 1 }}
-                                sm={{ size: 6, offset: 1 }}
-                                md={{ size: 6, offset: 1 }}
+                                xs={{ size: 12, offset: 0 }}
+                                sm={{ size: 12, offset: 0 }}
+                                md={{ size: 12, offset: 0 }}
                                 lg={{ size: 6, offset: 1 }}>
                                 <PlayerList playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
                             </Col>
 
                             <Col 
-                                xs={{ size: 4, offset: 0 }}
-                                sm={{ size: 4, offset: 0 }}
-                                md={{ size: 4, offset: 0 }}
+                                xs={{ size: 12, offset: 0 }}
+                                sm={{ size: 12, offset: 0 }}
+                                md={{ size: 12, offset: 0 }}
                                 lg={{ size: 4, offset: 0 }}>
                                 <AddWeight compUpdate={this.props.compUpdate} competitionData={this.state.competitionData}/>
                             </Col>
@@ -78,8 +103,8 @@ class Content extends Component {
 
                         <Row style={{ paddingBottom: '40px', margin: 0 }}>
                             <Col 
-                                xs={{ size: 10, offset: 1 }}
-                                sm={{ size: 10, offset: 1 }}
+                                xs={{ size: 12, offset: 0 }}
+                                sm={{ size: 12, offset: 0 }}
                                 md={{ size: 10, offset: 1 }}
                                 lg={{ size: 10, offset: 1 }}>
                                 <Rules competitionData={this.state.competitionData}/>
