@@ -45,14 +45,18 @@ class Content extends Component {
                 competitions: nextProps.competitions,
             })
         }
-        console.log(this.state.competitions)
     }
 
     render() {      
         return (
             <div>
                 <Container className='d-sm-none p-0'>
-                    <XSCompList compList={this.state.competitions} compData={this.props.compData}/>
+                    {(this.state.competitions)
+                        ? (this.state.competitions.length > 1)
+                            ?<XSCompList compList={this.state.competitions} compData={this.props.compData}/>
+                            : null
+                        : null
+                    }
                 </Container>
 
 

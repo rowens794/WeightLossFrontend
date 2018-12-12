@@ -28,6 +28,11 @@ class XSCompList extends Component {
         }
     }
 
+    clickCombine(compID, compAdmin) {
+        this.showHideToggle()
+        this.props.compData(compID, compAdmin)
+    }
+
     render() {
         return (
             <div className={css(styles.mobileBar)}>
@@ -42,7 +47,7 @@ class XSCompList extends Component {
                     <animated.div className="item" style={props}>
                         {(this.props.compList && this.state.show)
                             ? this.props.compList.map((comp) => {
-                                return <div key={comp.id} onClick={() => this.props.compData(comp.id, comp.admin)}> {comp.name} </div> 
+                                return <div key={comp.id} onClick={() => this.clickCombine(comp.id, comp.admin)}> {comp.name} </div> 
                             }) 
                             : null}
                     </animated.div>

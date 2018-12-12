@@ -7,10 +7,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    Container, 
-    Row, 
-    Col} from 'reactstrap';
+    NavLink} from 'reactstrap';
 import colors from '../Styling/styles';
 import LoginModal from '../LoginModal/LoginModal';
 import ForgotPasswordModal from '../ForgotPasswordModal/ForgotPasswordModal';

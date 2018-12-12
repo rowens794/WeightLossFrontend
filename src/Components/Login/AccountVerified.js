@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import axios from 'axios';
+import { Container, Row, Col } from 'reactstrap';
+
 import colors from '../Styling/styles';
+import Button from '../Elements/Button';
 
 class Verified extends Component {
 
@@ -60,9 +63,18 @@ class Verified extends Component {
 
                 <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>
                 <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
-                <button className={css(styles.submit)} onClick={() => login()}>
-                    <p>sign-in</p>
-                </button>
+                <Container>
+                    <Row>
+                        <Col 
+                            xs={{ size: 10, offset: 1 }}
+                            sm={{ size: 8, offset: 2 }}
+                            md={{ size: 6, offset: 3 }}
+                            lg={{ size: 4, offset: 4 }}
+                            xl={{ size: 4, offset: 4 }}>
+                                <Button onClick={() => login()} buttonText='Sign-in' />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
             
         );
@@ -206,8 +218,6 @@ const styles = StyleSheet.create({
             'width': '10%',
             'margin-left': '45%',
         },
-
-        'font-family': 'Patrick Hand',
         float: 'left',
         cursor: 'pointer'
     },
