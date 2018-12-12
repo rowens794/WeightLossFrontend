@@ -10,6 +10,8 @@ import RegisterFromInvite from './Components/Register/RegisterFromInvite';
 import RegistrationRecieved from './Components/RegistrationRecieved/RegistrationRecieved';
 import Login from './Components/Login/Login';
 import Verified from './Components/Login/AccountVerified';
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
+import ResetPassword from './Components/ForgotPassword/ResetPassword'
 import Dashboard from './Components/Dashboard/Dashboard';
 import CreateComp from './Components/CreateComp/CreateComp';
 import { MyProvider } from './Components/ContextProvider/ContextProvider';
@@ -26,6 +28,8 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route exact path="/resetpassword/:ID/:verificationString" component={ResetPassword} />
             <Route exact path="/verified" component={Verified} />
             <Route exact path="/register/" component={Register} />
             <Route exact path="/registrationrecieved" component={RegistrationRecieved} />

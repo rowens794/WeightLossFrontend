@@ -1,8 +1,49 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import { Container, Row, Col } from 'reactstrap';
+import axios from 'axios';
+
 import colors from '../Styling/styles';
+import Button from '../Elements/Button';
+
 
 class ForgotPasswordModal extends Component {
+    constructor(props) {
+        super()
+
+        this.state = {
+            message: 'Enter your email and we will send a password reset request immediately.'
+        }
+    }
+
+    updatePassword = function() {
+        var username = document.getElementById('username').value
+        var self = this
+        
+        axios.post('http://localhost:3001/forgotpassword', {
+            username: username,
+        })
+        .then(function (response) {
+            if (response.data === '{"reset":"failed"}'){
+                
+                self.setState({
+                    message: 'error sending reset request'
+                });
+
+            }else{
+                console.log(response.data)
+                self.setState({
+                    message: 'An email with a password reset link is on the way to your email inbox'
+                });
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            self.setState({
+                message: 'there was a problem resetting your password'
+            });
+        });
+    }
 
     render() {
         return (
@@ -12,9 +53,20 @@ class ForgotPasswordModal extends Component {
                     <h3 className={css(styles.title)}>Password Reset</h3>
                     <br/>
                     <form>
-                        <p className={css(styles.text)}>email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                        <input className={css(styles.submit)} type="submit" value="Reset Now!"></input><br/>
-                        <p className={css(styles.message)}>Enter your email and we'll send a password reset request immediately.</p>
+                        <p className={css(styles.text)}>email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>
+                        <Container>
+                            <Row>
+                                <Col 
+                                    xs={{ size: 10, offset: 1 }}
+                                    sm={{ size: 8, offset: 2 }}
+                                    md={{ size: 6, offset: 3 }}
+                                    lg={{ size: 6, offset: 3 }}
+                                    xl={{ size: 6, offset: 3 }}>
+                                        <Button onClick={() => this.updatePassword()} buttonText='reset password' />
+                                </Col>
+                            </Row>
+                        </Container>
+                        <p className={css(styles.message)} id='message'>{this.state.message}</p>
                     </form>
                     <br/>
                 </div>

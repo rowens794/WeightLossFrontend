@@ -6,48 +6,51 @@ import { Container, Row, Col } from 'reactstrap';
 import colors from '../Styling/styles';
 import Button from '../Elements/Button';
 
-class Verified extends Component {
+class ResetPassword extends Component {
 
     constructor(props) {
         super();
 
         this.state = {
-            errorMsg: 'Your account is now verified.  Please sign-in.'
+            errorMsg: ''
         }
     }
 
     render() {
-        let login = () => {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+        let setPassword = () => {
             var self = this;
-            
-            axios.post('http://localhost:3001/signin', {
-                username: username,
-                password: password
-            })
-            .then(function (response) {
-                if (response.data === '{"login":"failed"}'){
-                    
-                    self.setState({
-                        errorMsg: 'username or password incorrect'
-                    });
 
-                }else{
-                    localStorage.setItem('userToken', response.data.token);
-                    localStorage.setItem('tokenExp', response.data.tokenExp);
-                    localStorage.setItem('userID', response.data.userID);
-                    localStorage.setItem('accountVerified', response.data.verified);
-                    window.location.href = "/dashboard";
-                }
-                
-            })
-            .catch(function (error) {
-                console.log(error)
-                self.setState({
-                    errorMsg: 'there was a problem with your login'
+            var password = document.getElementById('password').value
+            var confirm = document.getElementById('password').value
+            var verificationString = this.props.match.params.verificationString
+            var userID = this.props.match.params.ID
+
+            if(password===confirm){
+                axios.post('http://localhost:3001/setpassword', {
+                    password: password,
+                    verificationString: verificationString,
+                    id: userID
+                })
+                .then(function (response) {
+                    if (response.data === '{"reset":"failed"}'){
+                        
+                        self.setState({
+                            errorMsg: 'failed to reset users password'
+                        });
+    
+                    }else{
+                        self.setState({
+                            errorMsg: 'Password reset successfully. Please login.'
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    self.setState({
+                        errorMsg: 'there was a problem resetting your password'
+                    });
                 });
-            });
+            }
         }
 
         return (
@@ -59,10 +62,10 @@ class Verified extends Component {
                 </div>
 
                 <p className={css(styles.success)}>{this.state.errorMsg}</p>
-                <p className={css(styles.title)}>Login to Your Account</p>
+                <p className={css(styles.title)}>Set a New Password</p>
 
-                <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>
                 <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
+                <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" id="confirm"></input><br/><br/>
                 <Container>
                     <Row>
                         <Col 
@@ -71,13 +74,7 @@ class Verified extends Component {
                             md={{ size: 6, offset: 3 }}
                             lg={{ size: 4, offset: 4 }}
                             xl={{ size: 4, offset: 4 }}>
-                                <Button onClick={() => login()} buttonText='Sign-in' />
-                        </Col>
-                    </Row>
-
-                    <Row className={css(styles.forgotPass)}>
-                        <Col>
-                            <a href='/forgotpassword'>forgot password</a>
+                                <Button onClick={() => setPassword()} buttonText='reset password' />
                         </Col>
                     </Row>
                 </Container>
@@ -87,7 +84,8 @@ class Verified extends Component {
     }
 }
 
-export default Verified;
+
+export default ResetPassword;
 
 const styles = StyleSheet.create({
     RegisterSection: {
@@ -126,10 +124,10 @@ const styles = StyleSheet.create({
         paddingBottom: '25px'
     },
 
-    success: {
+    error: {
         'font-family': 'Patrick Hand',
         fontSize: '22px',
-        color: colors.green,
+        color: colors.red,
         textAlign: 'center',
         textDecoration: 'none',
         paddingBottom: '10px'
@@ -224,6 +222,8 @@ const styles = StyleSheet.create({
             'width': '10%',
             'margin-left': '45%',
         },
+
+        'font-family': 'Patrick Hand',
         float: 'left',
         cursor: 'pointer'
     },
@@ -241,9 +241,6 @@ const styles = StyleSheet.create({
     formBody: {
         margin: '40px',
         paddingBottom: '50px'
-    },
-    forgotPass: {
-        marginTop: '25px'
     }
 
 });
