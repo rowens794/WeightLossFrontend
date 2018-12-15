@@ -75,9 +75,15 @@ class NotStartedAdmin extends Component {
             .then(function (response) {
                 if (response.data === '{"status":"failed"}'){
                     console.log('Error 1: user has manipulated local storage or DOM elements')
-                }else{
+                }else if (response.data === '{"status":"user alread enrolled"}'){
+                    console.log('This user is already participating in the competition')
+                    document.getElementById('resMessage').innerHTML = `${name} is already participating in the competition`
+                    document.getElementById('name').value = ''
+                    document.getElementById('email').value = ''
+                }
+                else {
                     console.log('Success: new user has been added to competition')
-                    document.getElementById('resMessage').innerHTML = `${name} has been invited to join the competition`
+                    document.getElementById('resMessage').innerHTML = `${name} has already been invited to join the competition`
                     document.getElementById('name').value = ''
                     document.getElementById('email').value = ''
                 }

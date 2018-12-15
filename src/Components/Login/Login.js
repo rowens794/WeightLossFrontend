@@ -18,8 +18,8 @@ class Login extends Component {
 
     render() {
         let login = () => {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+            var username = document.getElementById('username1').value;
+            var password = document.getElementById('password1').value;
             var self = this;
             
             axios.post('http://localhost:3001/signin', {
@@ -61,8 +61,8 @@ class Login extends Component {
                 <p className={css(styles.success)}>{this.state.errorMsg}</p>
                 <p className={css(styles.title)}>Login to Your Account</p>
 
-                <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username"></input><br/><br/>
-                <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
+                <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="username1"></input><br/><br/>
+                <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password1"></input><br/><br/>
                 <Container>
                     <Row>
                         <Col 

@@ -27,6 +27,7 @@ class RegisterFromInvite extends Component {
             competitionId: this.props.match.params.id,
         })
         .then(function (response) {
+            console.log(response)
             if (response.data.status === 'failed') {
                 self.setState({
                     // this should only be hit if user messes with token 
