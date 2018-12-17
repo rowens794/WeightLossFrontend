@@ -7,6 +7,7 @@ import axios from 'axios';
 import { MyContext } from '../ContextProvider/ContextProvider';
 import Sidebar from './Sidebar/Sidebar';
 import Content from './Content/Content';
+import Config from '../Config/config';
 
 class Dashboard extends Component {
 
@@ -32,7 +33,7 @@ class Dashboard extends Component {
         if(this.state.activeCompetition){
             //if it's loaded then make sure that the same competition isn't re-retrieved from the API
             if(this.state.activeCompetition._id !== id){
-                await axios.post('http://localhost:3001/compData', {
+                await axios.post(Config.backendRootURL+'/compData', {
                     token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
                     competitionId: id,
                 })

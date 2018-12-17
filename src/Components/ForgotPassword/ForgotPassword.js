@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { StyleSheet, css } from 'aphrodite';
-import axios from 'axios';
-import { Container, Row, Col } from 'reactstrap';
+import React, { Component } from 'react'
+import { StyleSheet, css } from 'aphrodite'
+import axios from 'axios'
+import { Container, Row, Col } from 'reactstrap'
 
-import colors from '../Styling/styles';
-import Button from '../Elements/Button';
+import colors from '../Styling/styles'
+import Button from '../Elements/Button'
+import Config from '../Config/config'
 
 class ForgotPassword extends Component {
 
@@ -21,7 +22,7 @@ class ForgotPassword extends Component {
             var username = document.getElementById('username').value;
             var self = this;
             
-            axios.post('http://localhost:3001/forgotpassword', {
+            axios.post(Config.backendRootURL+'/forgotpassword', {
                 username: username,
             })
             .then(function (response) {

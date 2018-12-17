@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 import colors from '../Styling/styles';
 import Button from '../Elements/Button';
+import Config from '../Config/config'
 
 class ResetPassword extends Component {
 
@@ -26,7 +27,7 @@ class ResetPassword extends Component {
             var userID = this.props.match.params.ID
 
             if(password===confirm){
-                axios.post('http://localhost:3001/setpassword', {
+                axios.post(Config.backendRootURL+'/setpassword', {
                     password: password,
                     verificationString: verificationString,
                     id: userID

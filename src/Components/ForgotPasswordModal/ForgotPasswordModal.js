@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import colors from '../Styling/styles';
 import Button from '../Elements/Button';
+import Config from '../Config/config'
 
 
 class ForgotPasswordModal extends Component {
@@ -20,7 +21,7 @@ class ForgotPasswordModal extends Component {
         var username = document.getElementById('username').value
         var self = this
         
-        axios.post('http://localhost:3001/forgotpassword', {
+        axios.post(Config.backendRootURL+'/forgotpassword', {
             username: username,
         })
         .then(function (response) {

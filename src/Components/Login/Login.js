@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 import colors from '../Styling/styles';
 import Button from '../Elements/Button';
+import Config from '../Config/config'
 
 class Login extends Component {
 
@@ -22,7 +23,7 @@ class Login extends Component {
             var password = document.getElementById('password1').value;
             var self = this;
             
-            axios.post('http://localhost:3001/signin', {
+            axios.post(Config.backendRootURL+'/signin', {
                 username: username,
                 password: password
             })

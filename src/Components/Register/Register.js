@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import colors from '../Styling/styles';
+import Config from '../Config/config'
 
 class Register extends Component {
 
@@ -15,7 +16,7 @@ class Register extends Component {
 
                 <p className={css(styles.title)}>Get Your Competition Started</p>
 
-                <form className='formBody' action="http://localhost:3001/registration" method="post">
+                <form className='formBody' action={Config.backendRootURL+"/registration"} method="post">
                     <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
                     <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
                     <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>

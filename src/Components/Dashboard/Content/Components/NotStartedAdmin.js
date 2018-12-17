@@ -5,7 +5,8 @@ import validator from "email-validator";
 import axios from 'axios';
 
 import Button from '../../../Elements/Button'
-import colors from '../../../Styling/styles';
+import colors from '../../../Styling/styles'
+import Config from '../../../Config/config'
 
 class NotStartedAdmin extends Component {
     constructor(props) {
@@ -68,7 +69,7 @@ class NotStartedAdmin extends Component {
         console.log(fieldErrors)
         //if no field errors then post data to DB
         if(!fieldErrors){
-            axios.post('http://localhost:3001/addUserToComp', {
+            axios.post(Config.backendRootURL+'/addUserToComp', {
                     token: localStorage.getItem('userToken'),
                     newUser: saveObject
             })

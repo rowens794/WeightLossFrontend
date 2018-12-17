@@ -9,7 +9,8 @@ import validator from "email-validator";
 import "react-datepicker/dist/react-datepicker.css";
 import { MyContext } from '../ContextProvider/ContextProvider';
 import Button from '../Elements/Button'
-import colors from '../Styling/styles';
+import colors from '../Styling/styles'
+import Config from '../Config/config'
 
 class CreateComp extends Component {
     constructor(props) {
@@ -134,7 +135,7 @@ class CreateComp extends Component {
 
         //if no field errors then post data to DB
         if(!fieldErrors){
-            axios.post('http://localhost:3001/createCompetition', {
+            axios.post(Config.backendRootURL+'/createCompetition', {
                     token: localStorage.getItem('userToken'),
                     competitionInfo: saveObject
             })

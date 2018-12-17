@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 import colors from '../Styling/styles';
 import Button from '../Elements/Button';
+import Config from '../Config/config'
 
 class Verified extends Component {
 
@@ -24,7 +25,7 @@ class Verified extends Component {
             console.log(username)
             console.log(password)
             
-            axios.post('http://localhost:3001/signin', {
+            axios.post(Config.backendRootURL+'/signin', {
                 username: username,
                 password: password
             })

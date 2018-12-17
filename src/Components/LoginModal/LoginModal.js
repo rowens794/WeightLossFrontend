@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import axios from 'axios';
 import colors from '../Styling/styles';
+import Config from '../Config/config'
 
 
 class LoginModal extends Component {
@@ -28,7 +29,7 @@ class LoginModal extends Component {
             var self = this;
             let closeModal = self.props.handleClose;
             
-            axios.post('http://localhost:3001/signin', {
+            axios.post(Config.backendRootURL+'/signin', {
                 username: username,
                 password: password
             })

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Container, Row, Col } from 'reactstrap';
 
 import Rules from '../Dashboard/Content/Components/Rules'
+import Config from '../Config/config'
 
 
 
@@ -23,7 +24,7 @@ class RegisterFromInvite extends Component {
 
     componentDidMount(){
         let self = this
-        axios.post('http://localhost:3001/limitedCompData', {
+        axios.post(Config.backendRootURL+'/limitedCompData', {
             competitionId: this.props.match.params.id,
         })
         .then(function (response) {
