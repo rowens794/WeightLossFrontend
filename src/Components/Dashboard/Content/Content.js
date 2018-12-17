@@ -130,7 +130,7 @@ class Content extends Component {
                     </ Container>
                 : 
                 <Container fluid style={{ padding: 0, marginTop: '25vh', marginBottom: '25vh' }}>
-                    <Row style={{ padding: 0, margin: 0 }} className='.d-none.d-sm-block.d-md-block.d-lg-block.d-xl-block'>
+                    <Row style={{ padding: 0, margin: 0 }} className='d-none d-sm-block d-md-block d-lg-block d-xl-block'>
                         <Col 
                             xs={{ size: 12, offset: 0 }}
                             sm={{ size: 12, offset: 0 }}
@@ -140,7 +140,7 @@ class Content extends Component {
                             <p className={css(styles.text1)}>click the blue button on the sidebar</p>
                         </Col>
                     </Row>
-                    <Row style={{ padding: 0, margin: 0 }} className='.d-none.d-xs-block'>
+                    <Row style={{ padding: 0, margin: 0 }} className='d-xs-block d-sm-none d-md-none d-lg-none d-xl-none'>
                         <Col 
                             xs={{ size: 12, offset: 0 }}
                             sm={{ size: 12, offset: 0 }}
