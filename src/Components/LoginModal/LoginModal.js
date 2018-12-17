@@ -35,7 +35,7 @@ class LoginModal extends Component {
             })
             .then(function (response) {
                 if (response.data === '{"login":"failed"}'){
-                    
+                    console.log('error logging in')
                     self.setState({
                         errorMsg: 'username or password incorrect'
                     });
