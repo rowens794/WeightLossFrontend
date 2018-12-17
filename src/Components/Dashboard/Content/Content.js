@@ -130,7 +130,7 @@ class Content extends Component {
                     </ Container>
                 : 
                 <Container fluid style={{ padding: 0, marginTop: '25vh', marginBottom: '25vh' }}>
-                    <Row style={{ padding: 0, margin: 0 }}>
+                    <Row style={{ padding: 0, margin: 0 }} className='.d-none.d-sm-block.d-md-block.d-lg-block.d-xl-block'>
                         <Col 
                             xs={{ size: 12, offset: 0 }}
                             sm={{ size: 12, offset: 0 }}
@@ -138,6 +138,16 @@ class Content extends Component {
                             lg={{ size: 12, offset: 0 }}>
                             <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
                             <p className={css(styles.text1)}>click the blue button on the sidebar</p>
+                        </Col>
+                    </Row>
+                    <Row style={{ padding: 0, margin: 0 }} className='.d-none.d-xs-block'>
+                        <Col 
+                            xs={{ size: 12, offset: 0 }}
+                            sm={{ size: 12, offset: 0 }}
+                            md={{ size: 12, offset: 0 }}
+                            lg={{ size: 12, offset: 0 }}>
+                            <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
+                            <p className={css(styles.text1)}>Please log in via PC or laptop to do so.</p>
                         </Col>
                     </Row>
                 </ Container>}
