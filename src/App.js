@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ReactGA from 'react-ga';
-
 import './App.css';
 import Header from './Components/HeaderBar/HeaderBar';
 import HomePage from './Components/HomePage/HomePage';
@@ -17,7 +16,6 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import CreateComp from './Components/CreateComp/CreateComp';
 import { MyProvider } from './Components/ContextProvider/ContextProvider';
 
-
 ReactGA.initialize('UA-96829474-3');
 
 function fireTracking() {
@@ -25,29 +23,29 @@ function fireTracking() {
 }
 
 class App extends Component {
-
-    render() {
-        return (
-        <Router onUpdate={fireTracking}>
-            <MyProvider>
-            <div className="App">
-                <Header />
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/forgotpassword" component={ForgotPassword} />
-                <Route exact path="/resetpassword/:ID/:verificationString" component={ResetPassword} />
-                <Route exact path="/verified" component={Verified} />
-                <Route exact path="/register/" component={Register} />
-                <Route exact path="/registrationrecieved" component={RegistrationRecieved} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/createcomp" component={CreateComp} />
-                <Route exact path="/joinacompetition/:id" component={RegisterFromInvite}/> 
-                <FooterBar />
-            </div>
-            </MyProvider>
-        </Router>
-        );
-    }
-    }
+  
+  render() {
+    return (
+      <Router onUpdate={fireTracking}>
+        <MyProvider>
+          <div className="App">
+            <Header />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route exact path="/resetpassword/:ID/:verificationString" component={ResetPassword} />
+            <Route exact path="/verified" component={Verified} />
+            <Route exact path="/register/" component={Register} />
+            <Route exact path="/registrationrecieved" component={RegistrationRecieved} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/createcomp" component={CreateComp} />
+            <Route exact path="/joinacompetition/:id" component={RegisterFromInvite}/> 
+            <FooterBar />
+          </div>
+        </MyProvider>
+      </Router>
+    );
+  }
+}
 
 export default App;
