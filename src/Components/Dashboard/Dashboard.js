@@ -33,7 +33,7 @@ class Dashboard extends Component {
         if(this.state.activeCompetition){
             //if it's loaded then make sure that the same competition isn't re-retrieved from the API
             if(this.state.activeCompetition._id !== id){
-                await axios.post(Config.backendRootURL+'/compData', {
+                await axios.post(Config.backendRootURL + '/compData', {
                     token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
                     competitionId: id,
                 })
@@ -53,7 +53,7 @@ class Dashboard extends Component {
             }
         }else{
             //if competition doesn't exist in state then go ahead and grab from the api
-            await axios.post('http://localhost:3001/compData', {
+            await axios.post(Config.backendRootURL + '/compData', {
                 token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
                 competitionId: id,
             })
@@ -76,7 +76,7 @@ class Dashboard extends Component {
 
     async updateCompData(id, updateFields){
         let self = this
-        await axios.post('http://localhost:3001/updateCompData', {
+        await axios.post(Config.backendRootURL + '/updateCompData', {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
             competitionId: id,
             updateFields: updateFields

@@ -138,7 +138,6 @@ class Content extends Component {
                             lg={{ size: 12, offset: 0 }}>
                             <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
                             <p className={css(styles.text1)}>click the blue button on the sidebar</p>
-                            <p className={css(styles.text1)}>{localStorage.getItem('userToken')}</p>
                         </Col>
                     </Row>
                 </ Container>}
