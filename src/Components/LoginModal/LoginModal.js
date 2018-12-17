@@ -35,13 +35,10 @@ class LoginModal extends Component {
             })
             .then(function (response) {
                 if (response.data === '{"login":"failed"}'){
-                    console.log('error logging in')
                     self.setState({
                         errorMsg: 'username or password incorrect'
                     });
                 }else{
-                    console.log('set local storage')
-                    console.log(response.data)
                     localStorage.setItem('userToken', response.data.token);
                     localStorage.setItem('tokenExp', response.data.tokenExp);
                     localStorage.setItem('userID', response.data.userID);
@@ -52,7 +49,6 @@ class LoginModal extends Component {
                 
             })
             .catch(function (error) {
-                console.log(error)
                 self.setState({
                     errorMsg: 'there was a problem with your login'
                 });

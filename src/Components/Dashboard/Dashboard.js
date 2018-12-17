@@ -18,7 +18,7 @@ class Dashboard extends Component {
         this.updateCompData = this.updateCompData.bind(this);
 
         this.state = {
-            userName: 'Waiting for Server',
+            userName: '',
             errorMsg: null,
             competitions: [],
             activeCompetition: null,
@@ -141,7 +141,7 @@ class Dashboard extends Component {
     async componentDidMount(){
         const self = this;  //'this' loses context in axios function ... set to var 'self'
 
-        axios.post('http://localhost:3001/userData', {
+        axios.post(Config.backendRootURL + '/userData', {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
         })
         .then(function (response) {
@@ -170,7 +170,7 @@ class Dashboard extends Component {
 
 
 
-        axios.post('http://localhost:3001/userCompData', {
+        axios.post(Config.backendRootURL + '/userCompData', {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
             compID: 234134 //don't know how to populate this yet
         })
