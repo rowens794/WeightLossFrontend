@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {XYPlot, XAxis, YAxis, VerticalGridLines, LineSeries, } from 'react-vis';
 import { Container, Row, Col } from 'reactstrap';
+import { StyleSheet, css } from 'aphrodite';
 
 import colors from '../../../Styling/styles'
 
@@ -117,16 +118,23 @@ class Chart extends Component {
         }
 
         return (
-            <div id='chartContainer'>
+            <div id='chartContainer' className={css(styles.container)}>
                 { //Check if message failed
                     
                     (this.state.playerData && allPlayersWeighedIn)
-                    ?   <Container fluid style={{ padding: 0, marginTop: 0 }}>
+                    ?   <Container fluid style={{ padding: 0, marginTop: 0}}>
+
+                            <Row style={{ padding: 0, margin: 0 }}>
+                                <Col sm={{ size: 12, offset: 0 }}>
+                                    <h3 className={css(styles.heading)}>% Weight Change</h3>
+                                </Col>
+                            </Row>
+
                             <Row style={{ padding: 0, margin: 0 }}>
                                 <Col sm={{ size: 12, offset: 0 }}>
 
                                     
-                                    <XYPlot xType="time" width={document.getElementById("chartContainer").clientWidth} height={document.getElementById("chartContainer").clientWidth * .5} margin={{bottom: 100}}>
+                                    <XYPlot xType="time" width={document.getElementById("chartContainer").clientWidth * .9} height={document.getElementById("chartContainer").clientWidth * .5} margin={{bottom: 100}}>
                                     
                                         <VerticalGridLines />
                                         <XAxis tickLabelAngle={-70} style={xAxisStyles}/>
@@ -167,3 +175,14 @@ class Chart extends Component {
 export default Chart;
 
 
+const styles = StyleSheet.create({
+    container: {
+        'text-align': 'center',
+        margin: 'auto'
+    },
+    heading: {
+        marginTop: '20px',
+        marginBottom: '20px',
+        'text-align': 'left',
+    },
+});

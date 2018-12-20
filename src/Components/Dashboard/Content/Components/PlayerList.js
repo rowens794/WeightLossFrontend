@@ -34,10 +34,9 @@ class PlayerList extends Component {
             for(let i=0; i<playerData.length; i++){
 
                 //set initial variables
-                var today = moment(new Date()).format('M/D/YY')
-                var startDate = moment(new Date(this.state.competitionData.StartDate)).format('M/D/YY')//get date into proper format to serve as key
+                var today = moment(new Date()).format('M/D/YYYY')
+                var startDate = moment(new Date(this.state.competitionData.StartDate)).format('M/D/YYYY')//get date into proper format to serve as key
                 var initialWeight = playerData[i][2][startDate]
-
 
                     //get most recent weigh in
                     let keys = Object.keys(playerData[i][2])
@@ -45,7 +44,7 @@ class PlayerList extends Component {
                     
                     for( let j=0; j<keys.length; j++){
                         var nextDay = moment(new Date(startDate)).add(j, 'days')
-                        var lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+                        var lookedUpWeight = playerData[i][2][nextDay.format('M/D/YYYY')]
                         
                         if (nextDay <= moment(new Date(today)) && (lookedUpWeight)) {
                             mostRecentWeight = lookedUpWeight
@@ -56,16 +55,15 @@ class PlayerList extends Component {
                     var lastWeeklyWeight = initialWeight
                     for( let k=0; k<keys.length; k+=7){
                         nextDay = moment(new Date(startDate)).add(k, 'days')
-                        lookedUpWeight = playerData[i][2][nextDay.format('M/D/YY')]
+                        lookedUpWeight = playerData[i][2][nextDay.format('M/D/YYYY')]
                         
                         if (nextDay <= moment(new Date(today)) && lookedUpWeight !== null){
                             lastWeeklyWeight = lookedUpWeight
-                            var lastWeeklyWeighIn = nextDay.format('M/D/YY')
+                            var lastWeeklyWeighIn = nextDay.format('M/D/YYYY')
                         }
                     }
     
                     //set weight changes
-                    
                     var totalLoss = (((mostRecentWeight - initialWeight) / initialWeight) * 100).toFixed(2)
                     var weeklyLoss = 0
                     
@@ -104,6 +102,12 @@ class PlayerList extends Component {
         return (
             <Container fluid style={{ padding: 0, marginTop: 0 }}>
                 <Row style={{ padding: 0, margin: 0 }}>
+                    <Col sm={{ size: 12, offset: 0 }}>
+                        <h3 className={css(styles.heading)}>Current Leaderboard</h3>
+                    </Col>
+                </Row>
+
+                <Row style={{ padding: 0, margin: 0 }}>
                     <Col 
                         xs={{ size: 2, offset: 0 }}
                         sm={{ size: 2, offset: 0 }}
@@ -114,28 +118,19 @@ class PlayerList extends Component {
                     </Col>
 
                     <Col 
-                        xs={{ size: 4, offset: 0 }}
-                        sm={{ size: 4, offset: 0 }}
-                        md={{ size: 4, offset: 0 }}
-                        lg={{ size: 4, offset: 0 }}
+                        xs={{ size: 6, offset: 0 }}
+                        sm={{ size: 6, offset: 0 }}
+                        md={{ size: 6, offset: 0 }}
+                        lg={{ size: 6, offset: 0 }}
                         >
                         <p className={css(styles.text)}>Player</p>
                     </Col>
 
                     <Col 
-                        xs={{ size: 3, offset: 0 }}
-                        sm={{ size: 3, offset: 0 }}
-                        md={{ size: 3, offset: 0 }}
-                        lg={{ size: 3, offset: 0 }}
-                        >
-                        <p className={css(styles.text)}>Week %</p>
-                    </Col>
-
-                    <Col 
-                        xs={{ size: 3, offset: 0 }}
-                        sm={{ size: 3, offset: 0 }}
-                        md={{ size: 3, offset: 0 }}
-                        lg={{ size: 3, offset: 0 }}
+                        xs={{ size: 4, offset: 0 }}
+                        sm={{ size: 4, offset: 0 }}
+                        md={{ size: 4, offset: 0 }}
+                        lg={{ size: 4, offset: 0 }}
                         >
                         <p className={css(styles.text)}>Total %</p>
                     </Col>
@@ -154,26 +149,18 @@ class PlayerList extends Component {
                             </Col>
 
                             <Col 
-                                xs={{ size: 4, offset: 0 }}
-                                sm={{ size: 4, offset: 0 }}
-                                md={{ size: 4, offset: 0 }}
-                                lg={{ size: 4, offset: 0 }}>
+                                xs={{ size: 6, offset: 0 }}
+                                sm={{ size: 6, offset: 0 }}
+                                md={{ size: 6, offset: 0 }}
+                                lg={{ size: 6, offset: 0 }}>
                                 <p className={css(styles.text)}>{player[0]}</p>
                             </Col>
 
                             <Col 
-                                xs={{ size: 3, offset: 0 }}
-                                sm={{ size: 3, offset: 0 }}
-                                md={{ size: 3, offset: 0 }}
-                                lg={{ size: 3, offset: 0 }}>
-                                <p className={css(styles.text)}>{player[1]}</p>
-                            </Col>
-
-                            <Col 
-                                xs={{ size: 3, offset: 0 }}
-                                sm={{ size: 3, offset: 0 }}
-                                md={{ size: 3, offset: 0 }}
-                                lg={{ size: 3, offset: 0 }}>
+                                xs={{ size: 4, offset: 0 }}
+                                sm={{ size: 4, offset: 0 }}
+                                md={{ size: 4, offset: 0 }}
+                                lg={{ size: 4, offset: 0 }}>
                                 <p className={css(styles.text)}>{player[2]}</p>
                             </Col>
                         </Row>
@@ -192,5 +179,10 @@ export default PlayerList;
 const styles = StyleSheet.create({
     text: {
         'text-align': 'center',
+    },
+    heading: {
+        marginTop: '20px',
+        marginBottom: '20px',
+        'text-align': 'left',
     },
 });

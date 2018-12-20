@@ -59,7 +59,7 @@ class RegisterFromInvite extends Component {
 
                         <p className={css(styles.title)}>Join the {this.state.competition.CompetitionName}</p>
 
-                        <form className='formBody' action={"http://localhost:3001/registerfrominvite/"+this.props.match.params.id} method="post">
+                        <form className='formBody' action={Config.backendRootURL+"/registerfrominvite/"+this.props.match.params.id} method="post">
                             <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
                             <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
                             <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>

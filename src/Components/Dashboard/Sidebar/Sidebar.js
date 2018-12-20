@@ -35,13 +35,13 @@ export default Sidebar;
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: colors.yellow,
+        backgroundColor: colors.grey,
         position: 'relative',
         top: 0,
         left: 0,
         overflowX: 'hidden',
         paddingTop: '30px',
-        height: '100%'
+        height: '100%',
     },
 
     horRow: {

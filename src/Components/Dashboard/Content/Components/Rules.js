@@ -43,15 +43,15 @@ class Rules extends Component {
                         ruleFour = [<p key='rule41'>There will be no interim payouts during the competition</p>]
                         break;
                     case '52W':
-                        totalIterimPayout = competitionLength / 7 / 2 * prizePool * .05
+                        totalIterimPayout = (competitionLength / 7 / 2 - 1)  * prizePool * .05
                         ruleFour = [<p key='rule42'>The biggest loser for each 2 week stretch of the competition will win <span className={css(styles.emph)}>${prizePool * .05}</span></p>]
                         break;
                     case '54W':
-                        totalIterimPayout = competitionLength / 7 / 4 * prizePool * .05
+                        totalIterimPayout = (competitionLength / 7 / 4 - 1) * prizePool * .05
                         ruleFour = [<p key='rule43'>The biggest loser for each 4 week stretch of the competition will win <span className={css(styles.emph)}>{prizePool * .05}</span> dollars</p>]
                         break;
                     default:
-                        totalIterimPayout = competitionLength / 7 / 4 * prizePool * .10
+                        totalIterimPayout = (competitionLength / 7 / 4 - 1) * prizePool * .10
                         ruleFour = [<p key='rule44'>The biggest loser for each 4 week stretch of the competition will win <span className={css(styles.emph)}>{prizePool * .1}</span> dollars</p>]
                 }
                 

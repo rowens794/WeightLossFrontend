@@ -80,7 +80,7 @@ export default class SubHeaderBar extends Component {
 
 
                 <Navbar color="light" light expand="md" className={css(styles.black)}>
-                    <NavbarBrand href="/" className={css(styles.logo)}>Bigluzors</NavbarBrand>
+                    <NavbarBrand href="/" className={css(styles.logo)}>FlippingTheScales</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} className={'navbar-dark'}/>
                     
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     black: {
         backgroundColor: colors.black,
         zIndex: 100,
+        'box-shadow': '0 0 30px #333'
     },
     font: {
         color: colors.lightBlue,

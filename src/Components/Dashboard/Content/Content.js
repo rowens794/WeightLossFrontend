@@ -12,6 +12,8 @@ import Chart from './Components/Chart';
 import NotStarted from './Components/NotStarted'
 import NotStartedAdmin from './Components/NotStartedAdmin'
 import XSCompList from './Components/XSCompList'
+import WinnersCircle from './Components/WinnersCircle';
+import ContentHolder from './Components/ContentHolder'
 
 class Content extends Component {
 
@@ -61,7 +63,10 @@ class Content extends Component {
 
 
                 {this.state.competitionData ? 
-                    <Container fluid style={{ padding: 0, margin: 0 }}>
+                    <Container fluid style={{ padding: 0, margin: 0 }} className={css(styles.background)}>
+                        <div className={css(styles.hero)}></div>
+                        <div className={css(styles.bottomHero)}></div>
+                        
                         <Row style={{ padding: 0, margin: 0 }}>
                             <Col 
                                 xs={{ size: 12, offset: 0 }}
@@ -70,7 +75,6 @@ class Content extends Component {
                                 lg={{ size: 12, offset: 0 }}>
                                 <h2 className={css(styles.title)}>{this.state.competitionName}</h2>
                                 <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
-                                
                             </Col>
                         </Row>
 
@@ -80,21 +84,23 @@ class Content extends Component {
                                 sm={{ size: 11, offset: 1 }}
                                 md={{ size: 10, offset: 1 }}
                                 lg={{ size: 10, offset: 1 }}>
-                                {//test if the competition has started
-                                    (new Date() >= new Date(this.state.competitionData.StartDate)) 
-                                        //if it has then show the weight chart
-                                        ? <Chart playerData={this.state.competitionData.Players}/>
-                                        : (this.state.competitionAdmin)
-                                            //if it hasn't and user is competition admin show add user
-                                            ? <NotStartedAdmin 
-                                                compID= {this.state.competitionData._id}
-                                                startDate={this.state.competitionData.StartDate}
-                                                competitionName={this.state.competitionData.CompetitionName}
-                                                newUserEmail={null}
-                                                newUserName={null} />
-                                            //else show reminder to login on start date
-                                            : <NotStarted startDate={this.state.competitionData.StartDate}/>
-                                    }
+                                <ContentHolder>
+                                    {//test if the competition has started
+                                        (new Date() >= new Date(this.state.competitionData.StartDate)) 
+                                            //if it has then show the weight chart
+                                            ? <Chart playerData={this.state.competitionData.Players}/>
+                                            : (this.state.competitionAdmin)
+                                                //if it hasn't and user is competition admin show add user
+                                                ? <NotStartedAdmin 
+                                                    compID= {this.state.competitionData._id}
+                                                    startDate={this.state.competitionData.StartDate}
+                                                    competitionName={this.state.competitionData.CompetitionName}
+                                                    newUserEmail={null}
+                                                    newUserName={null} />
+                                                //else show reminder to login on start date
+                                                : <NotStarted startDate={this.state.competitionData.StartDate}/>
+                                        }
+                                </ContentHolder>
                             </Col>
                         </Row>
 
@@ -104,7 +110,9 @@ class Content extends Component {
                                 sm={{ size: 12, offset: 0 }}
                                 md={{ size: 12, offset: 0 }}
                                 lg={{ size: 6, offset: 1 }}>
-                                <PlayerList playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
+                                <ContentHolder>
+                                    <PlayerList playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
+                                </ContentHolder>
                             </Col>
 
                             <Col 
@@ -112,7 +120,12 @@ class Content extends Component {
                                 sm={{ size: 12, offset: 0 }}
                                 md={{ size: 12, offset: 0 }}
                                 lg={{ size: 4, offset: 0 }}>
-                                <AddWeight compUpdate={this.props.compUpdate} competitionData={this.state.competitionData}/>
+                                <div className={css(styles.buttonBox)}>
+                                    <ContentHolder >
+                                        <AddWeight compUpdate={this.props.compUpdate} competitionData={this.state.competitionData}/>
+                                    </ContentHolder>
+
+                                </div>
                             </Col>
 
                         </Row>
@@ -123,7 +136,21 @@ class Content extends Component {
                                 sm={{ size: 12, offset: 0 }}
                                 md={{ size: 10, offset: 1 }}
                                 lg={{ size: 10, offset: 1 }}>
-                                <Rules competitionData={this.state.competitionData}/>
+                                <ContentHolder>
+                                    <WinnersCircle playerData={this.state.competitorData} competitionData={this.state.competitionData}/>
+                                </ContentHolder>
+                            </Col>
+                        </Row>
+
+                        <Row style={{ paddingBottom: '40px', margin: 0 }}>
+                            <Col 
+                                xs={{ size: 12, offset: 0 }}
+                                sm={{ size: 12, offset: 0 }}
+                                md={{ size: 10, offset: 1 }}
+                                lg={{ size: 10, offset: 1 }}>
+                                <ContentHolder>
+                                    <Rules competitionData={this.state.competitionData}/>
+                                </ContentHolder>
                             </Col>
                         </Row>
 
@@ -160,13 +187,22 @@ export default Content;
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: colors.white,
+        backgroundColor: '#F4F7F8',
         position: 'relative',
+    },
+    hero: {
+        backgroundColor: colors.black,
+        width: '100%',
+        height: '400px',
+        marginBottom: '-400px'
     },
     title: {
         paddingTop: '50px',
+        fontSize: '3em',
         paddingLeft: '50px',
         textAlign: 'left',
+        color: colors.white,
+        fontWeight: 'bolder'
     },
     title1: {
         paddingTop: '50px',
@@ -183,6 +219,8 @@ const styles = StyleSheet.create({
         paddingBottom: '50px',
         fontStyle: 'italic',
         textAlign: 'left',
+        fontSize: '1em',
+        color: colors.white,
     },
     chartPlaceholder: {
         width: '100%',
@@ -196,6 +234,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         padding: '20px'
     },
+    buttonBox: {
+        '@media (max-width: 991px)': {
+            'padding-top': '50px',
+        }
+    }
 
 
 

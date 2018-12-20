@@ -74,17 +74,7 @@ class PlayerList extends Component {
 export default PlayerList;
 
 const styles = StyleSheet.create({
-    box: {
-        border: '1px solid'+ colors.black,
-        backgroundColor: colors.extraLightBlue,
-        'border-radius': '10px',
-        padding: '10px',
-        marginTop: '0px',
-        '@media (max-width: 991px)' : {
-            marginTop: '75px'
-        }
 
-    },
     text: {
         'text-align': 'center',
     },
