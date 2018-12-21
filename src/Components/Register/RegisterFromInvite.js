@@ -15,9 +15,14 @@ class RegisterFromInvite extends Component {
     constructor(props) {
         super();
 
+        this.handleSubmit.bind(this)
+
         this.state = {
-            competitionID:  '',
+            errorMsg: '',
+            competitionID: '',
             competition: null,
+            password: 'y',
+            confirm: 'x'
     
         }    
     }
@@ -43,6 +48,51 @@ class RegisterFromInvite extends Component {
         })
     }
 
+    handleSubmit = function(event) {
+        var self = this;
+        event.preventDefault();
+
+        var password = document.getElementById('password').value
+        var confirmPassword = document.getElementById('confirmPassword').value
+
+        self.setState({
+            password: password,
+            confirm: confirmPassword
+        })
+        console.log(password)
+        console.log(confirmPassword)
+
+        if(this.state.password === this.state.confirm){
+            axios.post(Config.backendRootURL+"/registerfrominvite/"+self.props.match.params.id, {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                comp_id: document.getElementById('comp_id').value
+            }).then(function (response) {
+                console.log(response)
+                if (response.data.message !== 'success'){
+                    console.log(response.data)
+                    self.setState({
+                        errorMsg: response.data.message
+                    });
+    
+                }else{
+                    window.location.href = "/registrationrecieved";
+                }    
+            }).catch(function (error) {
+                console.log(error)
+                self.setState({
+                    errorMsg: 'there was a problem with your login'
+                });
+            });
+
+        }else{
+            self.setState({
+                errorMsg: 'the passwords do not match'
+            });
+        }
+    }
+
 
 
     render() {
@@ -59,13 +109,14 @@ class RegisterFromInvite extends Component {
 
                         <p className={css(styles.title)}>Join the {this.state.competition.CompetitionName}</p>
 
-                        <form className='formBody' action={Config.backendRootURL+"/registerfrominvite/"+this.props.match.params.id} method="post">
-                            <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
-                            <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                            <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
-                            <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" name="confirm password"></input><br/><br/>
-                            <input type="hidden" value={this.props.match.params.id} name="comp_id" />
-                            {console.log(this.props.match.params.id)}
+                        <p className={css(styles.error)}>{this.state.errorMsg}</p>
+
+                        <form className='formBody' onSubmit={event => this.handleSubmit(event)}>
+                            <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" id="name"></input><br/><br/>
+                            <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="email"></input><br/><br/>
+                            <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
+                            <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" id="confirmPassword"></input><br/><br/>
+                            <input type="hidden" value={this.props.match.params.id} id="comp_id" />
                             <input className={css(styles.submit)} type="submit" value="Submit"></input>
                         </form>
 
@@ -240,6 +291,11 @@ const styles = StyleSheet.create({
     formBody: {
         margin: '40px',
         paddingBottom: '50px'
+    },
+    error:{
+        'font-family': 'Patrick Hand',
+        fontSize: '16px',
+        color: colors.red,
     }
 
 });

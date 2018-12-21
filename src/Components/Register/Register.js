@@ -10,6 +10,8 @@ class Register extends Component {
     constructor(props) {
         super(props);
 
+        this.handleSubmit.bind(this)
+        
         this.state = {
             errorMsg: '',
             password: '',
@@ -20,23 +22,16 @@ class Register extends Component {
     handleSubmit = function(event) {
         var self = this;
         event.preventDefault();
-        const data = new FormData(event.target)
-        console.log(data)
+
         var password = document.getElementById('password').value
         var confirmPassword = document.getElementById('confirmPassword').value
-
-        this.setState({
-            password: password,
-            confirm: confirmPassword
-        })
         
         if(password === confirmPassword){
             axios.post(Config.backendRootURL+'/registration', {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value
-            })
-            .then(function (response) {
+            }).then(function (response) {
                 console.log(response)
                 if (response.data.message !== 'success'){
                     console.log(response.data)
@@ -48,13 +43,13 @@ class Register extends Component {
                     window.location.href = "/registrationrecieved";
                 }
                 
-            })
-            .catch(function (error) {
+            }).catch(function (error) {
                 console.log(error)
                 self.setState({
                     errorMsg: 'there was a problem with your login'
                 });
             });
+
         }else{
             self.setState({
                 errorMsg: 'the passwords do not match'
@@ -74,7 +69,7 @@ class Register extends Component {
                 <p className={css(styles.title)}>Get Your Competition Started</p>
                 <p className={css(styles.error)}>{this.state.errorMsg}</p>
 
-                <form className='formBody' onSubmit={event => this.handleSubmit(event)} action={Config.backendRootURL+"/registration"} method="post">
+                <form className='formBody' onSubmit={event => this.handleSubmit(event)} method="post">
                     <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" id="name"></input><br/><br/>
                     <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="email"></input><br/><br/>
                     <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
