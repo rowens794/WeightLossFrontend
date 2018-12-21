@@ -11,13 +11,24 @@ class Register extends Component {
         super(props);
 
         this.state = {
-            error: '',
+            errorMsg: '',
+            password: '',
+            confirm: ''
         };
     }
 
-    handleSubmit() {
-        var password = document.getElementById('password1').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
+    handleSubmit = function(event) {
+        var self = this;
+        event.preventDefault();
+        const data = new FormData(event.target)
+        console.log(data)
+        var password = document.getElementById('password').value
+        var confirmPassword = document.getElementById('confirmPassword').value
+
+        this.setState({
+            password: password,
+            confirm: confirmPassword
+        })
         
         if(password === confirmPassword){
             axios.post(Config.backendRootURL+'/registration', {
@@ -27,30 +38,25 @@ class Register extends Component {
             })
             .then(function (response) {
                 console.log(response)
-                if (response.data === '{message: A user with the given username is already registered}'){
-                    
-                    this.setState({
-                        errorMsg: 'username or password incorrect'
+                if (response.data.message !== 'success'){
+                    console.log(response.data)
+                    self.setState({
+                        errorMsg: response.data.message
                     });
     
                 }else{
-
-                    // localStorage.setItem('userToken', response.data.token);
-                    // localStorage.setItem('tokenExp', response.data.tokenExp);
-                    // localStorage.setItem('userID', response.data.userID);
-                    // localStorage.setItem('accountVerified', response.data.verified);
                     window.location.href = "/registrationrecieved";
                 }
                 
             })
             .catch(function (error) {
                 console.log(error)
-                this.setState({
+                self.setState({
                     errorMsg: 'there was a problem with your login'
                 });
             });
         }else{
-            this.setState({
+            self.setState({
                 errorMsg: 'the passwords do not match'
             });
         }
@@ -66,8 +72,9 @@ class Register extends Component {
                 </div>
 
                 <p className={css(styles.title)}>Get Your Competition Started</p>
+                <p className={css(styles.error)}>{this.state.errorMsg}</p>
 
-                <form className='formBody' onSubmit={this.handleSubmit} action={Config.backendRootURL+"/registration"} method="post">
+                <form className='formBody' onSubmit={event => this.handleSubmit(event)} action={Config.backendRootURL+"/registration"} method="post">
                     <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" id="name"></input><br/><br/>
                     <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="email"></input><br/><br/>
                     <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
@@ -227,6 +234,11 @@ const styles = StyleSheet.create({
     formBody: {
         margin: '40px',
         paddingBottom: '50px'
+    },
+    error:{
+        'font-family': 'Patrick Hand',
+        fontSize: '16px',
+        color: colors.red,
     }
 
 });
