@@ -11,7 +11,7 @@ class Register extends Component {
         super(props);
 
         this.handleSubmit.bind(this)
-        
+
         this.state = {
             errorMsg: '',
             password: '',
@@ -32,9 +32,7 @@ class Register extends Component {
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value
             }).then(function (response) {
-                console.log(response)
                 if (response.data.message !== 'success'){
-                    console.log(response.data)
                     self.setState({
                         errorMsg: response.data.message
                     });
@@ -44,7 +42,6 @@ class Register extends Component {
                 }
                 
             }).catch(function (error) {
-                console.log(error)
                 self.setState({
                     errorMsg: 'there was a problem with your login'
                 });

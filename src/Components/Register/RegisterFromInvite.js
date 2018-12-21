@@ -59,8 +59,6 @@ class RegisterFromInvite extends Component {
             password: password,
             confirm: confirmPassword
         })
-        console.log(password)
-        console.log(confirmPassword)
 
         if(this.state.password === this.state.confirm){
             axios.post(Config.backendRootURL+"/registerfrominvite/"+self.props.match.params.id, {
@@ -69,9 +67,7 @@ class RegisterFromInvite extends Component {
                 password: document.getElementById('password').value,
                 comp_id: document.getElementById('comp_id').value
             }).then(function (response) {
-                console.log(response)
                 if (response.data.message !== 'success'){
-                    console.log(response.data)
                     self.setState({
                         errorMsg: response.data.message
                     });
@@ -80,7 +76,6 @@ class RegisterFromInvite extends Component {
                     window.location.href = "/registrationrecieved";
                 }    
             }).catch(function (error) {
-                console.log(error)
                 self.setState({
                     errorMsg: 'there was a problem with your login'
                 });
