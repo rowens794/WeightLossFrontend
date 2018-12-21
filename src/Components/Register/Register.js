@@ -1,9 +1,60 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import axios from 'axios';
+
 import colors from '../Styling/styles';
 import Config from '../Config/config'
 
+
 class Register extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            error: '',
+        };
+    }
+
+    handleSubmit() {
+        var password = document.getElementById('password1').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if(password === confirmPassword){
+            axios.post(Config.backendRootURL+'/registration', {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            })
+            .then(function (response) {
+                console.log(response)
+                if (response.data === '{message: A user with the given username is already registered}'){
+                    
+                    this.setState({
+                        errorMsg: 'username or password incorrect'
+                    });
+    
+                }else{
+
+                    // localStorage.setItem('userToken', response.data.token);
+                    // localStorage.setItem('tokenExp', response.data.tokenExp);
+                    // localStorage.setItem('userID', response.data.userID);
+                    // localStorage.setItem('accountVerified', response.data.verified);
+                    window.location.href = "/registrationrecieved";
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error)
+                this.setState({
+                    errorMsg: 'there was a problem with your login'
+                });
+            });
+        }else{
+            this.setState({
+                errorMsg: 'the passwords do not match'
+            });
+        }
+    }
 
     render() {
         return (
@@ -16,11 +67,11 @@ class Register extends Component {
 
                 <p className={css(styles.title)}>Get Your Competition Started</p>
 
-                <form className='formBody' action={Config.backendRootURL+"/registration"} method="post">
-                    <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" name="name"></input><br/><br/>
-                    <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" name="email"></input><br/><br/>
-                    <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" name="password"></input><br/><br/>
-                    <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" name="confirm password"></input><br/><br/>
+                <form className='formBody' onSubmit={this.handleSubmit} action={Config.backendRootURL+"/registration"} method="post">
+                    <p className={css(styles.text)}>Name</p><input className={css(styles.input)} type="text" id="name"></input><br/><br/>
+                    <p className={css(styles.text)}>Email</p><input className={css(styles.input)} type="text" id="email"></input><br/><br/>
+                    <p className={css(styles.text)}>Password</p><input className={css(styles.input)} type="password" id="password"></input><br/><br/>
+                    <p className={css(styles.text)}>Confirm Password</p><input className={css(styles.input)} type="password" id="confirmPassword"></input><br/><br/>
                     <input className={css(styles.submit)} type="submit" value="Submit"></input>
                 </form>
             </div>
