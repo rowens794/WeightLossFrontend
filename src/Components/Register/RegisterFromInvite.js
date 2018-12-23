@@ -60,7 +60,7 @@ class RegisterFromInvite extends Component {
             confirm: confirmPassword
         })
 
-        if(this.state.password === this.state.confirm){
+        if(password === confirmPassword){
             axios.post(Config.backendRootURL+"/registerfrominvite/"+self.props.match.params.id, {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,

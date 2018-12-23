@@ -15,6 +15,7 @@ import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
 import ResetPassword from './Components/ForgotPassword/ResetPassword'
 import Dashboard from './Components/Dashboard/Dashboard';
 import CreateComp from './Components/CreateComp/CreateComp';
+import ManageSubscriptions from './Components/ManageSubscriptions/ManageSubscriptions';
 import { MyProvider } from './Components/ContextProvider/ContextProvider';
 
 import createHistory from 'history/createBrowserHistory'
@@ -47,6 +48,7 @@ class App extends Component {
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/createcomp" component={CreateComp} />
                 <Route exact path="/joinacompetition/:id" component={RegisterFromInvite}/> 
+                <Route exact path="/managesubscriptions" component={ManageSubscriptions}/> 
                 <FooterBar />
             </div>
             </MyProvider>
