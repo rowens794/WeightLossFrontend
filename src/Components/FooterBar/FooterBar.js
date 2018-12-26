@@ -6,10 +6,10 @@ class FooterBar extends Component {
     render() {
         return (
             <div className={css(styles.FooterBar)}>
-                <a className={css(styles.linkText)} href="www.google.com">About the Service</a><br/>
-                <a className={css(styles.linkText)} href="www.google.com">The Blog</a><br/>
-                <a className={css(styles.linkText)} href="www.google.com">Tools to Help You Lose</a><br/>
-                <a className={css(styles.linkText)} href="www.google.com">Privacy Policy</a><br/>
+                {/* <a className={css(styles.linkText)} href="www.google.com">About the Service</a><br/> */}
+                {/* <a className={css(styles.linkText)} href="www.google.com">The Blog</a><br/> */}
+                {/* <a className={css(styles.linkText)} href="www.google.com">Tools to Help You Lose</a><br/> */}
+                <a className={css(styles.linkText)} href="/privacy">Privacy Policy</a><br/>
             </div>
         );
     }

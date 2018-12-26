@@ -24,6 +24,7 @@ class Sidebar extends Component {
                         }) 
                     }
                     <Button href='/createComp' buttonText='New Competition' />
+                    <br /><br />
                     
                 </div>
             </div>
