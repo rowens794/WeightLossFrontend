@@ -9,8 +9,8 @@ class WinnersCircle extends Component {
         super();
 
         this.state = {
-            playerData: props,
-            competitionData: props,
+            playerData: props.playerData,
+            competitionData: props.competitionData,
             date: moment(new Date()).format('M/D/YYYY'),
         }    
     }
@@ -147,17 +147,22 @@ class WinnersCircle extends Component {
     calculateWinnerForPeriod(playersObj, endDate, startDate){
         //function takes in player & period params and returns the winner + weight lost for period
         let playerWeightLoss = []
+        console.log(playersObj)
 
         if(new Date() > new Date(endDate)){
             for(let k = 0; k < playersObj.length; k++){
+                console.log(playersObj[k][0])
                 let startingWeight = playersObj[k][2][startDate]
                 let endingWeight = playersObj[k][2][endDate]
+                console.log(startDate + ' - starting weight: '+ startingWeight)
+                console.log(endDate + ' - ending weight: '+ endingWeight)
                 if(startingWeight && endingWeight){
                     let percentageWeightLost = (endingWeight - startingWeight) / startingWeight
                     playerWeightLoss.push([playersObj[k][0], percentageWeightLost])
                 }else{
                     playerWeightLoss.push([playersObj[k][0], null])
                 }
+                console.log(playerWeightLoss)
             }
     
             playerWeightLoss.sort(function (a,b) {
