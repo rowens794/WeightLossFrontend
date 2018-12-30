@@ -97,8 +97,10 @@ class WinnersCircle extends Component {
         if (prizeAwardFreq){ //test if interim prizes are actually awarded
             for(let j=prizeAwardFreq; j<competitionLength; j+=prizeAwardFreq){
                 
+                //i need to find the period start date based on j and period start date
                 let periodEndDate = moment(new Date(competition.StartDate)).add(j, 'days').format("M/D/YYYY")
-                let sortedPlayers = this.calculateWinnerForPeriod(this.state.playerData, periodEndDate, moment(new Date(competition.StartDate)).format("M/D/YYYY"))
+                console.log(periodEndDate)
+                let sortedPlayers = this.calculateWinnerForPeriod(this.state.playerData, periodEndDate, moment(new Date(periodEndDate)).subtract(prizeAwardFreq,'days').format("M/D/YYYY"))
                 if (new Date() > new Date(periodEndDate)){
                     [name, weightLost] = sortedPlayers[0]
                 }else{
@@ -147,7 +149,6 @@ class WinnersCircle extends Component {
     calculateWinnerForPeriod(playersObj, endDate, startDate){
         //function takes in player & period params and returns the winner + weight lost for period
         let playerWeightLoss = []
-        console.log(playersObj)
 
         if(new Date() > new Date(endDate)){
             for(let k = 0; k < playersObj.length; k++){

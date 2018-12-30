@@ -10,8 +10,8 @@ class PlayerList extends Component {
         super();
 
         this.state = {
-            playerData: props,
-            competitionData: props,
+            playerData: props.playerData,
+            competitionData: props.competitionData,
             date: moment(new Date()).format('M/D/YYYY'),
         }    
     }
@@ -86,7 +86,6 @@ class PlayerList extends Component {
             const playersSortedByLoss = processedData.sort(function(a,b){
                 return a[2] - b[2]
             })
-
             return playersSortedByLoss
         }
     }
