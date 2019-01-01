@@ -99,7 +99,6 @@ class WinnersCircle extends Component {
                 
                 //i need to find the period start date based on j and period start date
                 let periodEndDate = moment(new Date(competition.StartDate)).add(j, 'days').format("M/D/YYYY")
-                console.log(periodEndDate)
                 let sortedPlayers = this.calculateWinnerForPeriod(this.state.playerData, periodEndDate, moment(new Date(periodEndDate)).subtract(prizeAwardFreq,'days').format("M/D/YYYY"))
                 if (new Date() > new Date(periodEndDate)){
                     [name, weightLost] = sortedPlayers[0]
@@ -152,18 +151,14 @@ class WinnersCircle extends Component {
 
         if(new Date() > new Date(endDate)){
             for(let k = 0; k < playersObj.length; k++){
-                console.log(playersObj[k][0])
                 let startingWeight = playersObj[k][2][startDate]
                 let endingWeight = playersObj[k][2][endDate]
-                console.log(startDate + ' - starting weight: '+ startingWeight)
-                console.log(endDate + ' - ending weight: '+ endingWeight)
                 if(startingWeight && endingWeight){
                     let percentageWeightLost = (endingWeight - startingWeight) / startingWeight
                     playerWeightLoss.push([playersObj[k][0], percentageWeightLost])
                 }else{
                     playerWeightLoss.push([playersObj[k][0], null])
                 }
-                console.log(playerWeightLoss)
             }
     
             playerWeightLoss.sort(function (a,b) {
