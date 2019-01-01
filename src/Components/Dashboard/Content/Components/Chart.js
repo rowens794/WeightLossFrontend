@@ -23,7 +23,7 @@ class Chart extends Component {
         this.setState({
             playerData: this.props.playerData,
             windowWidth: document.getElementById("chartContainer").clientWidth * .9,
-            windowHeight: document.getElementById("chartContainer").clientWidth * .5,
+            windowHeight: Math.max(document.getElementById("chartContainer").clientWidth * .5, 300),
         })
     }
 
@@ -39,7 +39,7 @@ class Chart extends Component {
         window.onresize = function() {
             self.setState({
                 windowWidth: document.getElementById("chartContainer").clientWidth * .9,
-                windowHeight: document.getElementById("chartContainer").clientWidth * .5,
+                windowHeight: Math.max(document.getElementById("chartContainer").clientWidth * .5, 300)
             })
         }
 
