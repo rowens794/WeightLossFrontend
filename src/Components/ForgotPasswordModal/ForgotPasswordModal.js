@@ -11,6 +11,7 @@ import Config from '../Config/config'
 class ForgotPasswordModal extends Component {
     constructor(props) {
         super()
+        this.handleClose = this.handleClose.bind() 
 
         this.state = {
             message: ''
@@ -20,37 +21,52 @@ class ForgotPasswordModal extends Component {
     updatePassword = function() {
         var username = document.getElementById('username').value
         var self = this
-        
-        axios.post(Config.backendRootURL+'/forgotpassword', {
-            username: username,
-        })
-        .then(function (response) {
-            if (response.data === '{"reset":"failed"}'){
-                
-                self.setState({
-                    message: 'error sending reset request'
-                });
 
-            }else{
-                console.log(response.data)
+        if(self.state.message !== 'An email with a password reset link is on the way to your email inbox'){
+
+            axios.post(Config.backendRootURL+'/forgotpassword', {
+                username: username,
+            })
+            .then(function (response) {
+                if (response.data === '{"reset":"failed"}'){
+                    
+                    self.setState({
+                        message: 'error sending reset request'
+                    });
+    
+                }else{
+                    self.setState({
+                        message: 'An email with a password reset link is on the way to your email inbox'
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
                 self.setState({
-                    message: 'An email with a password reset link is on the way to your email inbox'
+                    message: 'there was a problem resetting your password'
                 });
-            }
-        })
-        .catch(function (error) {
-            console.log(error)
-            self.setState({
-                message: 'there was a problem resetting your password'
             });
+
+        }else{
+            self.setState({
+                message: 'Seriously, go check your email'
+            });
+        }
+        
+    }
+
+    handleClose = () => {
+        this.setState({
+            message: ''
         });
+        this.props.handleClose()
     }
 
     render() {
         return (
             <div style={this.props.show ? {} : { display: 'none' }}>
                 <div className={css(styles.background)}>
-                    <button className={css(styles.x)} onClick={this.props.handleClose}>X</button><br/>
+                    <button className={css(styles.x)} onClick={this.handleClose}>X</button><br/>
                     <h3 className={css(styles.title)}>Password Reset</h3>
                     <br/>
                     <form>
