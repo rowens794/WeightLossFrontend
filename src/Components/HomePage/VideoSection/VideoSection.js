@@ -29,6 +29,9 @@ class VideoSection extends Component {
         return (
             <div className={css(styles.videoSection)}>
                 <div>
+                    <h2 className={css(styles.titleText)}>Learn How to Play</h2>
+                </div>
+                <div>
                     <YouTube className={css(styles.videoPlayer)} videoId="jJtoFZWddWU" opts={opts} onReady={this._onReady}/>
                 </div>
             </div>
@@ -64,6 +67,13 @@ const styles = StyleSheet.create({
     videoPlayer: {
         boxShadow: '10px 10px 5px 1px rgba(0, 0, 0, .3)',
         borderRadius: '5px',
+    },
+    titleText: {
+        'text-align': 'center',
+        'font-family': 'Patrick Hand',
+        color: colors.white,
+        transform: 'rotate(-3deg)',
+        'font-size': '6vmin',
     },
 
 });

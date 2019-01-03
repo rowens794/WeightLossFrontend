@@ -13,7 +13,7 @@ class ForgotPasswordModal extends Component {
         super()
 
         this.state = {
-            message: 'Enter your email and we will send a password reset request immediately.'
+            message: ''
         }
     }
 
