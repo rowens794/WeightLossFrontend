@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router'
 import DatePicker from "react-datepicker";
 import validator from "email-validator";
+import moment from 'moment';
  
 import "react-datepicker/dist/react-datepicker.css";
 import { MyContext } from '../ContextProvider/ContextProvider';
@@ -24,15 +25,28 @@ class CreateComp extends Component {
             errorInterimPrize: false,
             errorParticipants: false,
             startDate: new Date(),
-            participants: []
+            participants: [],
+            errorMessage: null
         };
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(date) {
-        this.setState({
-          startDate: date
-        });
+        let today = moment(new Date()).subtract(1,'day')
+        let startDate = moment(date).startOf('day')
+
+        console.log(startDate - today)
+
+        if((startDate - today) <= 0){
+            this.setState({
+                errorMessage: 'The competition cannot have a start date prior to today'
+            });
+        }else{
+            this.setState({
+                startDate: date,
+                errorMessage: null
+            });
+        }
     }
 
     addParticipant(participant) {
@@ -182,6 +196,11 @@ class CreateComp extends Component {
                                 <h2>Create a Competition</h2>
                             </Row>
 
+                            {this.state.errorMessage &&
+                            <Row style={{ textAlign: 'center' }}>
+                                <p className={css(styles.errorMessage)}>{this.state.errorMessage}</p>
+                            </Row>}
+
                             <form onSubmit={this.handleSubmit}>
                                 <Row >
                                     <Col>
@@ -329,5 +348,10 @@ const styles = StyleSheet.create({
         border: '1px solid'+ colors.black,
         'border-radius': '3px',
     },
+    errorMessage: {
+        color: colors.black,
+        backgroundColor: colors.red,
+        padding: '5px',
+    }
 
 });
