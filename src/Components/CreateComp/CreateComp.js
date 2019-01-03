@@ -193,13 +193,18 @@ class CreateComp extends Component {
                         <Container style={{ padding: 80 }}>
 
                             <Row style={{ padding: 20 }}>
-                                <h2>Create a Competition</h2>
+                                <Col>
+                                    <h2>Create a Competition</h2>
+                                </Col>
+                                <Col>
+                                    {this.state.errorMessage &&
+                                        <Row>
+                                            <p className={css(styles.errorMessage)}>{this.state.errorMessage}</p>
+                                        </Row>}
+                                </Col>
                             </Row>
 
-                            {this.state.errorMessage &&
-                            <Row style={{ textAlign: 'center' }}>
-                                <p className={css(styles.errorMessage)}>{this.state.errorMessage}</p>
-                            </Row>}
+                            
 
                             <form onSubmit={this.handleSubmit}>
                                 <Row >
@@ -349,9 +354,15 @@ const styles = StyleSheet.create({
         'border-radius': '3px',
     },
     errorMessage: {
-        color: colors.black,
+        textAlign: 'center',
+        color: colors.white,
+        fontWeight: 'bold',
         backgroundColor: colors.red,
-        padding: '5px',
+        padding: '3px',
+        borderRadius: '5px',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: colors.black
     }
 
 });
