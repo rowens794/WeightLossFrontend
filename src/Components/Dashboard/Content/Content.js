@@ -4,7 +4,7 @@ import colors from '../../Styling/styles';
 import { Container, Row, Col } from 'reactstrap';
 import moment from 'moment';
 
-
+import Button from '../../Elements/Button';
 import PlayerList from './Components/PlayerList';
 import AddWeight from './Components/AddWeight';
 import Rules from './Components/Rules';
@@ -174,7 +174,8 @@ class Content extends Component {
                             md={{ size: 12, offset: 0 }}
                             lg={{ size: 12, offset: 0 }}>
                             <h2 className={css(styles.title1)}>It's time to create a competition!</h2>
-                            <p className={css(styles.text1)}>Please log in via PC or laptop to do so.</p>
+                            <Button href='/createComp' buttonText='New Competition' />
+                            
                         </Col>
                     </Row>
                 </ Container>}

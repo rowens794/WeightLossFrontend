@@ -316,14 +316,29 @@ const styles = StyleSheet.create({
     },
     lowerHeading:{
         textAlign: 'left',
+        marginTop: '50px',
         marginBottom: '30px'
     },
     addPlayerSection: {
         margin: '40px',
+        '@media (max-width: 992px)': {
+            margin: '0px',
+        },
+        '@media (max-width: 768px)': {
+            margin: '0px',
+        }
     },
     playerList: {
         margin: '10px',
-        marginLeft: '30px'
+        marginLeft: '30px',
+        '@media (max-width: 992px)': {
+            margin: '0px',
+            marginLeft: '0px'
+        },
+        '@media (max-width: 768px)': {
+            margin: '0px',
+            marginLeft: '0px'
+        }
     },
     deletePlayer: {
         color: colors.red,
@@ -333,7 +348,10 @@ const styles = StyleSheet.create({
     addPlayerButton: {
         color: colors.green,
         cursor: 'pointer',
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        '@media (max-width: 992px)': {
+            marginTop: '20px',
+        },
     },
     inputField:{
         height: '35px',
@@ -342,6 +360,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         border: '1px solid ' + colors.black,
         borderRadius: '10px',
+        '@media (max-width: 992px)': {
+            width: '200px',
+        },
+        '@media (max-width: 768px)': {
+            width: '150px',
+        },
+        '@media (max-width: 540px)': {
+            width: '250px',
+        }
     },
     CreateCompButton: {
         'width': '150px',

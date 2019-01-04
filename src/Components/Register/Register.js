@@ -40,6 +40,7 @@ class Register extends Component {
                 }else{
                     window.location.href = "/registrationrecieved";
                 }
+
                 
             }).catch(function (error) {
                 self.setState({
