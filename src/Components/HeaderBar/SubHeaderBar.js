@@ -93,6 +93,9 @@ export default class SubHeaderBar extends Component {
                                             <NavLink href="/dashboard" className={css(styles.font)}>Dashboard</NavLink>
                                         </NavItem>
                                         <NavItem>
+                                            <NavLink href="/createComp" className={css(styles.font)}>Create Competition</NavLink>
+                                        </NavItem>
+                                        <NavItem>
                                             <NavLink href="#" className={css(styles.font)} onClick={this.logoutFunc}>Log-Out</NavLink>
                                         </NavItem>
                                     </React.Fragment>
