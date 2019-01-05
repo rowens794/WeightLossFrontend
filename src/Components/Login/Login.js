@@ -28,6 +28,7 @@ class Login extends Component {
                 password: password
             })
             .then(function (response) {
+                console.log(response.data)
                 if (response.data === '{"login":"failed"}'){
                     
                     self.setState({
@@ -36,7 +37,7 @@ class Login extends Component {
 
                 }else if(response.data === '{"login":"notVerified"}'){
                     window.location.href = "/registrationrecieved"
-                    
+
                 }else{
                     localStorage.setItem('userToken', response.data.token);
                     localStorage.setItem('tokenExp', response.data.tokenExp);

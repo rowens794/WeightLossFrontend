@@ -95,9 +95,9 @@ export default class SubHeaderBar extends Component {
                                         <NavItem>
                                             <NavLink href="/createComp" className={css(styles.font)}>Create Competition</NavLink>
                                         </NavItem>
-                                        <navItem>
+                                        <NavItem>
                                             <NavLink href='/blog/index.html' className={css(styles.font)}>Blog</NavLink>
-                                        </navItem>
+                                        </NavItem>
                                         <NavItem>
                                             <NavLink href="#" className={css(styles.font)} onClick={this.logoutFunc}>Log-Out</NavLink>
                                         </NavItem>
@@ -111,9 +111,9 @@ export default class SubHeaderBar extends Component {
                                         <NavItem>
                                             <NavLink href="#" className={css(styles.font)} onClick={this.loginOpen}>Sign-In</NavLink>
                                         </NavItem>
-                                        <navItem>
+                                        <NavItem>
                                             <NavLink href='/blog/index.html' className={css(styles.font)}>Blog</NavLink>
-                                        </navItem>
+                                        </NavItem>
                                     </React.Fragment>
                             }
                         </Nav>

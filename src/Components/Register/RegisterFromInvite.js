@@ -40,10 +40,27 @@ class RegisterFromInvite extends Component {
                     errorMsg: "Something went very wrong.  Signout and signback in.",  
                 })
             }else{
-                console.log(response.data)
-                self.setState({ 
-                    competition: response.data
-                })
+                
+                //check to see if user is already signed in
+                let userToken = localStorage.getItem('userToken');
+
+                if (userToken){
+                    console.log('userExists - add to competition')
+                    //send user to db for addition to competition and userobject
+                    axios.post(Config.backendRootURL+'/addUserToCompFromEmail', {
+                        competitionId: this.props.match.params.id,
+                        token: userToken
+                    })
+
+                    //redirect user to their dashboard
+                    window.location.href = "/dashboard"
+
+                }else{
+                    console.log('user does not exist')
+                    self.setState({ 
+                        competition: response.data
+                    })
+                }
             }
         })
     }
