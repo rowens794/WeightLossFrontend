@@ -54,6 +54,7 @@ class Verified extends Component {
         }
 
         return (
+
             <div className={css(styles.RegisterSection)}>
                 <div>
                     <div className={css(styles.imageContainer)}>

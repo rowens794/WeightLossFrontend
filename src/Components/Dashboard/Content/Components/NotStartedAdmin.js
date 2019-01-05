@@ -82,9 +82,14 @@ class NotStartedAdmin extends Component {
                     document.getElementById('name').value = ''
                     document.getElementById('email').value = ''
                 }
-                else {
+                else if (response.data === '{"status":"success"}'){
                     console.log('Success: new user has been added to competition')
-                    document.getElementById('resMessage').innerHTML = `${name} has already been invited to join the competition`
+                    document.getElementById('resMessage').innerHTML = `${name} has been added the competition`
+                    document.getElementById('name').value = ''
+                    document.getElementById('email').value = ''
+                }else{
+                    console.log('Success: new user has been invited to competition')
+                    document.getElementById('resMessage').innerHTML = `${name} has been invited to the competition`
                     document.getElementById('name').value = ''
                     document.getElementById('email').value = ''
                 }
