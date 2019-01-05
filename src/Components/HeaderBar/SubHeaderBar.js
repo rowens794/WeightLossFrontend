@@ -96,7 +96,7 @@ export default class SubHeaderBar extends Component {
                                             <NavLink href="/createComp" className={css(styles.font)}>Create Competition</NavLink>
                                         </NavItem>
                                         <navItem>
-                                            <NavLink href='/blog/blogIndex.html' className={css(styles.font)}>Blog</NavLink>
+                                            <NavLink href='/blog/index.html' className={css(styles.font)}>Blog</NavLink>
                                         </navItem>
                                         <NavItem>
                                             <NavLink href="#" className={css(styles.font)} onClick={this.logoutFunc}>Log-Out</NavLink>
