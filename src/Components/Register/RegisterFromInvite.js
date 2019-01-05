@@ -28,12 +28,12 @@ class RegisterFromInvite extends Component {
     }
 
     componentDidMount(){
-        let self = this
+        var self = this
         axios.post(Config.backendRootURL+'/limitedCompData', {
             competitionId: this.props.match.params.id,
         })
         .then(function (response) {
-            console.log(response)
+            var compID = response.data._id
             if (response.data.status === 'failed') {
                 self.setState({
                     // this should only be hit if user messes with token 
@@ -45,10 +45,9 @@ class RegisterFromInvite extends Component {
                 let userToken = localStorage.getItem('userToken');
 
                 if (userToken){
-                    console.log('userExists - add to competition')
                     //send user to db for addition to competition and userobject
                     axios.post(Config.backendRootURL+'/addUserToCompFromEmail', {
-                        competitionId: this.props.match.params.id,
+                        competitionId: compID,
                         token: userToken
                     })
 
