@@ -38,6 +38,7 @@ class Dashboard extends Component {
                     competitionId: id,
                 })
                 .then(function (response) {
+                    console.log(response)
                     if (response.data.status === 'failed') {
                         self.setState({
                             // this should only be hit if user messes with token 
@@ -64,6 +65,7 @@ class Dashboard extends Component {
                         errorMsg: "Something went very wrong.  Signout and signback in.",  
                     })
                 }else{
+                    console.log(response)
                     self.setState({ 
                         activeCompetition: response.data,
                         competitionAdmin: compAdmin
@@ -145,12 +147,14 @@ class Dashboard extends Component {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
         })
         .then(function (response) {
+            
             if (response.data.status === 'failed') {
                 self.setState({
                     // this should only be hit if user messes with token 
                     errorMsg: "Something went very wrong.  Signout and signback in.",  
                 })
             }else{
+                
                 self.setState({ 
                     userName: response.data.name,
                     competitions: response.data.competitions

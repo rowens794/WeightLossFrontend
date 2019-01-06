@@ -29,12 +29,15 @@ class RegisterFromInvite extends Component {
 
     componentDidMount(){
         var self = this
+        console.log('mount')
         axios.post(Config.backendRootURL+'/limitedCompData', {
             competitionId: this.props.match.params.id,
         })
         .then(function (response) {
+            console.log(response)
             var compID = response.data._id
             if (response.data.status === 'failed') {
+                console.log('error')
                 self.setState({
                     // this should only be hit if user messes with token 
                     errorMsg: "Something went very wrong.  Signout and signback in.",  
@@ -49,10 +52,13 @@ class RegisterFromInvite extends Component {
                     axios.post(Config.backendRootURL+'/addUserToCompFromEmail', {
                         competitionId: compID,
                         token: userToken
+                    }).then(function(response){
+                        console.log(response)
                     })
 
                     //redirect user to their dashboard
                     window.location.href = "/dashboard"
+
 
                 }else{
                     console.log('user does not exist')

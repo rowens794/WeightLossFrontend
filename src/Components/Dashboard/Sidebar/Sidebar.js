@@ -7,7 +7,7 @@ class Sidebar extends Component {
 
     render() {
         const primaryDivClasses = `d-none d-sm-block d-md-block d-lg-block d-xl-block ${css(styles.background)}`
-
+        console.log(this.props.userInfo)
         return (
             <div className={ primaryDivClasses }>
                 <div className={css(styles.hello)}>
