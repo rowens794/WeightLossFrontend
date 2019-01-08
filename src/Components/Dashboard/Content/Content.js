@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import colors from '../../Styling/styles';
 import { Container, Row, Col } from 'reactstrap';
-import moment from 'moment';
 
 import Button from '../../Elements/Button';
 import PlayerList from './Components/PlayerList';
@@ -49,7 +48,7 @@ class Content extends Component {
         }
     }
 
-    render() {      
+    render() {    
         return (
             <div>
                 <Container className='d-sm-none p-0'>
@@ -74,7 +73,7 @@ class Content extends Component {
                                 md={{ size: 12, offset: 0 }}
                                 lg={{ size: 12, offset: 0 }}>
                                 <h2 className={css(styles.title)}>{this.state.competitionName}</h2>
-                                <p className={css(styles.date)}>{moment(new Date()).format('M/D/YY')}</p>
+                                <p className={css(styles.date)}>Competition ID: {this.state.competitionData._id}</p>
                             </Col>
                         </Row>
 

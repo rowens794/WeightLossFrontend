@@ -17,6 +17,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import CreateComp from './Components/CreateComp/CreateComp';
 import ManageSubscriptions from './Components/ManageSubscriptions/ManageSubscriptions';
 import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy';
+import AddCompByID from './Components/AddCompByID/AddCompByID';
 import { MyProvider } from './Components/ContextProvider/ContextProvider';
 
 import createHistory from 'history/createBrowserHistory'
@@ -51,6 +52,7 @@ class App extends Component {
                 <Route exact path="/joinacompetition/:id" component={RegisterFromInvite}/> 
                 <Route exact path="/privacy" component={PrivacyPolicy}/> 
                 <Route exact path="/managesubscriptions" component={ManageSubscriptions}/> 
+                <Route exact path="/addcompbyid" component={AddCompByID}/> 
                 <FooterBar />
             </div>
             </MyProvider>

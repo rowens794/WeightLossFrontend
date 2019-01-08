@@ -38,7 +38,6 @@ class Dashboard extends Component {
                     competitionId: id,
                 })
                 .then(function (response) {
-                    console.log(response)
                     if (response.data.status === 'failed') {
                         self.setState({
                             // this should only be hit if user messes with token 
@@ -65,7 +64,6 @@ class Dashboard extends Component {
                         errorMsg: "Something went very wrong.  Signout and signback in.",  
                     })
                 }else{
-                    console.log(response)
                     self.setState({ 
                         activeCompetition: response.data,
                         competitionAdmin: compAdmin

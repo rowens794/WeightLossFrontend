@@ -24,7 +24,8 @@ class Sidebar extends Component {
                         }) 
                     }
                     <Button href='/createComp' buttonText='New Competition' />
-                    <br /><br />
+                    <br /><br /><br />
+                    <a className={css(styles.compByID)} href='/addcompbyid'>Add a Competition By ID</a>
                     
                 </div>
             </div>
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
         ':hover': {
             color: colors.red
         }
+    },
+    compByID: {
+        fontSize: '12px',
+        color: colors.black,
     }
 
 });

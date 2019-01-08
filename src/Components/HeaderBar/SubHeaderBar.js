@@ -95,6 +95,9 @@ export default class SubHeaderBar extends Component {
                                         <NavItem>
                                             <NavLink href="/createComp" className={css(styles.font)}>Create Competition</NavLink>
                                         </NavItem>
+                                        <NavItem className={css(styles.hiddenItem)}>
+                                            <NavLink href="/addcompbyid" className={css(styles.font)}>Add Competition By ID</NavLink>
+                                        </NavItem>
                                         <NavItem>
                                             <NavLink href='/blog/' className={css(styles.font)}>Blog</NavLink>
                                         </NavItem>
@@ -146,4 +149,9 @@ const styles = StyleSheet.create({
             color: colors.red,
         }
     },
+    hiddenItem: {
+        '@media (min-width: 576px)': {
+            display: 'none'
+        }
+    }
 });
