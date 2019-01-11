@@ -174,7 +174,6 @@ class Dashboard extends Component {
 
         axios.post(Config.backendRootURL + '/userCompData', {
             token: localStorage.getItem('userToken'),  //fetch the JWT from local storage
-            compID: 234134 //don't know how to populate this yet
         })
         .then(function (response) {
             if (response.data.status === 'failed') {
